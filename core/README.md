@@ -70,4 +70,4 @@ docker network inspect my_network
 
 grpcurl -plaintext localhost:50051 list
 grpcurl -plaintext localhost:50051 describe example.ExampleService
-grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/core/proto -proto example.proto -d '{"name": "world"}' localhost:8080 example.ExampleService/SayHello
+grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/simulator/core/proto -proto example.proto -d '{"name": "world"}' localhost:8080 example.ExampleService/SayHello

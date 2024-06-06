@@ -1,4 +1,4 @@
-module github.com/hijjiri/core
+module github.com/hijjiri/simulator/core
 
 go 1.21.0
 
