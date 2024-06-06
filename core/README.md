@@ -57,17 +57,18 @@ source ~/.zshrc
 ```
 
 # 扱ったコマンド一覧
-docker build -t hijjiri-core:latest .
-docker stop hijjiri-core
-docker rm hijjiri-core
-docker run -d --name hijjiri-core -p 50051:50051 hijjiri-core:latest
+docker build -t simulator-core:latest .
+docker stop core
+docker rm core
+docker run -d --name core -p 50051:50051 simulator-core:latest
 
 docker network create my_network
-docker network connect my_network hijjiri-core
-docker network connect my_network hijjiri-web
+docker network connect my_network core
+docker network connect my_network web
 docker network connect my_network envoy
 docker network inspect my_network
 
 grpcurl -plaintext localhost:50051 list
 grpcurl -plaintext localhost:50051 describe example.ExampleService
+
 grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/simulator/core/proto -proto example.proto -d '{"name": "world"}' localhost:8080 example.ExampleService/SayHello
