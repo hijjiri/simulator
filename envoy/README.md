@@ -1,13 +1,13 @@
 # 扱ったコマンド一覧
 
-docker run -d --name envoy -p 8088:8088 -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml envoyproxy/envoy:v1.18.3
+docker run -d --name envoy -p 8080:8080 -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml envoyproxy/envoy:v1.18.3
 docker restart envoy
 
 docker-compose down
 docker-compose up -d
 
 # Jenkins
-sudo lsof -i :8088 | grep LISTEN
+sudo lsof -i :8080 | grep LISTEN
 sudo kill -9 <PID>
 brew services restart jenkins-lts
 
