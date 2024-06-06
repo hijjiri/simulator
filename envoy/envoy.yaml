@@ -42,4 +42,4 @@ static_resources:
           - lb_endpoints:
               - endpoint:
                   address:
-                    socket_address: { address: core, port_value: 50051 }
+                    socket_address: { address: envoy-core, port_value: 50051 }
