@@ -62,13 +62,16 @@ docker stop core
 docker rm core
 docker run -d --name core -p 50051:50051 simulator-core:latest
 
+docker network ls
+docker network rm my_network
 docker network create my_network
 docker network connect my_network core
 docker network connect my_network web
 docker network connect my_network envoy
 docker network inspect my_network
+<!-- coreのIP取得 -->
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' envoy-core-1
 
 grpcurl -plaintext localhost:50051 list
 grpcurl -plaintext localhost:50051 describe example.ExampleService
-
-grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/simulator/core/proto -proto example.proto -d '{"name": "world"}' localhost:8080 example.ExampleService/SayHello
+grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/simulator/core/proto -proto example.proto -d '{"name": "world"}' localhost:50051 example.ExampleService/SayHello

@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  hijjiri-core:
-    image: hijjiri-core:latest
+  core:
+    image: simulator-core:latest
     ports:
       - "50051:50051"
     networks:
       - my_network
 
-  hijjiri-web:
-    image: hijjiri-web:latest
+  web:
+    image: simulator-web:latest
     ports:
       - "3000:80"
     networks:
@@ -22,8 +22,8 @@ services:
     networks:
       - my_network
     depends_on:
-      - hijjiri-core
-      - hijjiri-web
+      - core
+      - web
 
 networks:
   my_network:
