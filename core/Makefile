@@ -22,21 +22,21 @@ proto:
 	done
 
 # Dockerイメージのビルド
-.PHONY: docker-build
-docker-build:
-	docker build -t hijjiri-core:latest .
+.PHONY: build
+build:
+	docker build -t simulator-core:latest .
 
 # Dockerコンテナの停止と削除
-.PHONY: docker-stop
-docker-stop:
-	@if docker ps -a | grep hijjiri-core; then docker stop hijjiri-core && docker rm hijjiri-core; fi
+.PHONY: stop
+stop:
+	@if docker ps -a | grep core; then docker stop core && docker rm core; fi
 
 # Dockerコンテナの実行
-.PHONY: docker-run
-docker-run:
-	docker run -d --name hijjiri-core -p 50052:50052 hijjiri-core:latest
+.PHONY: run
+run:
+	docker run -d --name core -p 50051:50051 simulator-core:latest
 
 # Dockerコンテナの再ビルドと再実行
-.PHONY: docker-restart
-docker-restart: docker-build docker-run
-	@echo "Docker container hijjiri-core has been restarted."
+.PHONY: restart
+restart: build run
+	@echo "Docker container core has been restarted."
