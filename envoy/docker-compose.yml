@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  hijjiri-core:
+    image: hijjiri0712/hijjiri-core:latest
+    ports:
+      - "50051:50051"
+    networks:
+      - my_network
+
+  hijjiri-web:
+    image: hijjiri0712/hijjiri-web:latest
+    ports:
+      - "3000:80"
+    networks:
+      - my_network
+
+  envoy:
+    image: hijjiri0712/envoy:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    depends_on:
+      - hijjiri-core
+      - hijjiri-web
+
+networks:
+  my_network:
+    driver: bridge

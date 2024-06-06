@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: web/Dockerfile
+    core: core/Dockerfile
+    envoy: envoy/Dockerfile
