@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ExampleServiceClient } from './_proto/example_grpc_web_pb';
 import { HelloRequest } from './_proto/example_pb';
 
-const client = new ExampleServiceClient('http://localhost:8080');
+const client = new ExampleServiceClient(`${process.env.REACT_APP_GRPC_API_URL}`);
 
 function App() {
   const [message, setMessage] = useState('');
