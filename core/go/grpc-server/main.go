@@ -1,38 +1,26 @@
 package main
 
 import (
-	"context"
-	"log"
-	"net"
+    "log"
+    "net"
+    "os"
 
-	pb "github.com/hijjiri/simulator/core/go/grpc-server/example"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
+    "google.golang.org/grpc"
 )
-
-const (
-	port = ":50051"
-)
-
-type server struct {
-	pb.UnimplementedExampleServiceServer
-}
-
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, error) {
-	log.Printf("Received: %v", in.GetName())
-	return &pb.HelloResponse{Message: "Hello " + in.GetName()}, nil
-}
 
 func main() {
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
-	pb.RegisterExampleServiceServer(s, &server{})
-	reflection.Register(s)
-	log.Printf("server listening at %v", lis.Addr())
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "50051" // デフォルトポート
+    }
+    lis, err := net.Listen("tcp", ":"+port)
+    if err != nil {
+        log.Fatalf("failed to listen: %v", err)
+    }
+    s := grpc.NewServer()
+    // gRPCサーバーの登録コードをここに追加
+    log.Printf("server listening at %v", lis.Addr())
+    if err := s.Serve(lis); err != nil {
+        log.Fatalf("failed to serve: %v", err)
+    }
 }
