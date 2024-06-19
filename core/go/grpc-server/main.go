@@ -8,11 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	pb "github.com/hijjiri/core/go/grpc-server/example"
-)
-
-const (
-	defaultPort = "50051"
+	pb "github.com/hijjiri/simulator/core/go/grpc-server/example"
 )
 
 type server struct {
@@ -27,10 +23,10 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = defaultPort
+		port = "50051"
 	}
 
-	lis, err := net.Listen("tcp", ":"+port)
+	lis, err := net.Listen("tcp", ":" + port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
