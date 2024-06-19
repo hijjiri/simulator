@@ -19,8 +19,13 @@ sudo systemsetup -setremotelogin on
 
 # heroku
 heroku apps:destroy --app portfolio-simulator --confirm portfolio-simulator
-heroku create portfolio-simulator
 git remote rm heroku
 heroku git:remote -a portfolio-simulator
 heroku buildpacks:clear
 heroku stack:set container
+
+heroku create simulator-envoy
+heroku stack:set container -a simulator-envoy
+docker build -t registry.heroku.com/simulator-envoy/web --platform linux/amd64 .
+docker push registry.heroku.com/simulator-envoy/web
+heroku container:release web -a simulator-envoy

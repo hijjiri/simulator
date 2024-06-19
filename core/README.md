@@ -75,3 +75,10 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' env
 grpcurl -plaintext localhost:50051 list
 grpcurl -plaintext localhost:50051 describe example.ExampleService
 grpcurl -plaintext -import-path /Users/saitoshosuke/go/src/github.com/hijjiri/simulator/core/proto -proto example.proto -d '{"name": "world"}' localhost:50051 example.ExampleService/SayHello
+
+# Heroku
+heroku create simulator-core
+heroku stack:set container -a simulator-core
+docker build -t registry.heroku.com/simulator-core/web --platform linux/amd64 .
+docker push registry.heroku.com/simulator-core/web
+heroku container:release web -a simulator-core
