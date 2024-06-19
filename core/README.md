@@ -82,3 +82,6 @@ heroku stack:set container -a simulator-core
 docker build -t registry.heroku.com/simulator-core/web --platform linux/amd64 .
 docker push registry.heroku.com/simulator-core/web
 heroku container:release web -a simulator-core
+
+# Heroku test
+grpcurl -plaintext -d '{"name": "world"}' https://simulator-core.herokuapp.com:80 example.ExampleService/SayHello
