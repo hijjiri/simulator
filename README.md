@@ -30,3 +30,5 @@ heroku logs --tail -a simulator-envoy
 heroku config -a simulator-core
 heroku config -a simulator-web
 heroku config -a simulator-envoy
+
+heroku config:set REACT_APP_GRPC_API_URL=https://simulator-core.herokuapp.com -a simulator-web
