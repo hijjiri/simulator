@@ -84,4 +84,4 @@ docker push registry.heroku.com/simulator-core/web
 heroku container:release web -a simulator-core
 
 # Heroku test
-grpcurl -plaintext -d '{"name": "world"}' https://simulator-core.herokuapp.com:80 example.ExampleService/SayHello
+grpcurl -plaintext -d '{"name": "world"}' simulator-core.herokuapp.com:80 example.ExampleService/SayHello
