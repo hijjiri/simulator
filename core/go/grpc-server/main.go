@@ -5,8 +5,10 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/hijjiri/simulator/core/go/grpc-server/example"
-	exa "github.com/hijjiri/simulator/core/go/grpc-server/example/service" // エイリアスを付ける
+	pb_example "github.com/hijjiri/simulator/core/go/grpc-server/example"
+	example_service "github.com/hijjiri/simulator/core/go/grpc-server/example/service"
+	pb_janken "github.com/hijjiri/simulator/core/go/grpc-server/janken"
+	janken_service "github.com/hijjiri/simulator/core/go/grpc-server/janken/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -22,7 +24,8 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterExampleServiceServer(s, &exa.Server{})
+	pb_example.RegisterExampleServiceServer(s, &example_service.Server{})
+	pb_janken.RegisterJankenServiceServer(s, &janken_service.Server{})
 	reflection.Register(s)
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
