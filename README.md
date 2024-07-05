@@ -2,6 +2,14 @@
 
 # heroku
 
+heroku ps:scale web=1 --app simulator-core
+heroku ps:scale web=1 --app simulator-web
+heroku ps:scale web=1 --app simulator-envoy
+
+heroku ps:scale web=0 --app simulator-core
+heroku ps:scale web=0 --app simulator-web
+heroku ps:scale web=0 --app simulator-envoy
+
 docker build -t registry.heroku.com/simulator-core/web --platform linux/amd64 .
 docker build -t registry.heroku.com/simulator-web/web --platform linux/amd64 .
 docker build -t registry.heroku.com/simulator-envoy/web --platform linux/amd64 .
@@ -36,11 +44,7 @@ heroku config:set REACT_APP_GRPC_API_URL=https://simulator-core.herokuapp.com -a
 
 
 # 公開までのプロセス（議事録）
-
-リポジトリの内容を直接解析するための情報を取得できませんでしたが、基本的なアプローチについてお答えします。
-
 ### 公開リポジトリの構造と懸念点
-
 #### core
 - **内容**: gRPCサーバーの実装。
 - **懸念点**: サーバーのホスト名やポートが固定されている場合、Herokuでの動的な環境に対応できない可能性がある。
@@ -203,3 +207,18 @@ heroku ps:scale web=1 core=1 envoy=1
 ```
 
 これで、Herokuでのデプロイメントが完了し、各サービスが個別に起動されるようになります。
+
+
+Herokuの主な制約には、以下の点が含まれます：
+
+Docker Composeの非対応:
+Herokuではdocker-compose.ymlを直接使用して複数のコンテナを管理することができません。
+
+Dyno制限:
+Herokuの無料プランではアプリケーションのDyno数や使用時間に制限があります。
+
+Persistent Storageの非対応:
+Herokuでは永続的なストレージが提供されていません。ファイルシステムは一時的なものです。
+
+ネットワーク制限:
+Heroku内のコンテナ間の通信は外部経由で行われるため、ネットワーク遅延が発生する可能性があります。
