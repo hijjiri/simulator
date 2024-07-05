@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package janken;
+
+option go_package = "github.com/hijjiri/simulator/core/go/grpc-server/janken";
+
+enum Hand {
+    UNKNOWN = 0;
+    ROCK = 1;
+    PAPER = 2;
+    SCISSORS = 3;
+}
+
+message JankenRequest {
+    Hand player_hand = 1;
+}
+
+message JankenResponse {
+    Hand player_hand = 1;
+    Hand server_hand = 2;
+    string result = 3;
+}
+
+service JankenService {
+    rpc PlayJanken (JankenRequest) returns (JankenResponse);
+}
