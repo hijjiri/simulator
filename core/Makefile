@@ -1,7 +1,8 @@
 PROTO_DIR=./proto
 OUTPUT_DIR=./go/grpc-server
 JS_DIR=./src/assets/_proto
-GOOGLEAPIS_DIR=/Users/saitoshosuke/go/src/github.com/googleapis
+# GOOGLEAPIS_DIR=/Users/saitoshosuke/go/src/github.com/googleapisj
+GOOGLEAPIS_DIR=$(GOPATH)/src/github.com/googleapis
 
 # プロトコルバッファのコンパイル
 .PHONY: proto
