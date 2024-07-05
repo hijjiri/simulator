@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ExampleServiceClient } from './_proto/example_grpc_web_pb';
 import { HelloRequest } from './_proto/example_pb';
+import apiEndpoint from './config';
 
-const client = new ExampleServiceClient(`${process.env.REACT_APP_GRPC_API_URL}`);
+const client = new ExampleServiceClient(apiEndpoint);
 
 function App() {
   const [message, setMessage] = useState('');
