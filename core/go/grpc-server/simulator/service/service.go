@@ -2,10 +2,14 @@ package simulator
 
 import (
 	"context"
-	pb "github.com/hijjiri/simulator/core/go/grpc-server/simulator"
+	"errors"
+	"fmt"
 	"log"
 	"math/rand"
 	"time"
+
+	pb "github.com/hijjiri/simulator/core/go/grpc-server/simulator"
+	"github.com/hijjiri/simulator/core/go/grpc-server/user"
 )
 
 type Server struct {
@@ -13,6 +17,18 @@ type Server struct {
 }
 
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
+	userID := uint32(1001)
+	userData, err := user.LockUser(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("test", userData.Uid)
+
+	if userData.Uid != 0 {
+		return nil, errors.New("user is not properly locked")
+	}
+
 	log.Printf("Simulating battle %d times", in.GetCounts())
 	log.Printf("Offense Deck: %v", in.GetSimulateOffenseDeck().GetUnits())
 	log.Printf("Defense Deck: %v", in.GetSimulateDefenseDeck().GetUnits())
@@ -28,6 +44,9 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		winner := rand.Uint32()
 		resultCounts[winner]++
 	}
+
+	// ロック解除
+	user.UnlockUser(ctx, userID)
 
 	return &pb.SimulateResponse{
 		BattleId:     battleID,

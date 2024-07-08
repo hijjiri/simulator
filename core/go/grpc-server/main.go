@@ -13,6 +13,8 @@ import (
 	janken_service "github.com/hijjiri/simulator/core/go/grpc-server/janken/service"
 	pb_simulator "github.com/hijjiri/simulator/core/go/grpc-server/simulator"
 	simulator_service "github.com/hijjiri/simulator/core/go/grpc-server/simulator/service"
+	"github.com/hijjiri/simulator/core/go/grpc-server/user"
+	"github.com/hijjiri/simulator/core/go/grpc-server/user/repository"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -27,6 +29,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+
+	// Register in-memory user repository
+	userRepo := repository.NewInMemoryRepository()
+	user.RegisterRepository(userRepo)
+
 	s := grpc.NewServer()
 	pb_example.RegisterExampleServiceServer(s, &example_service.Server{})
 	pb_janken.RegisterJankenServiceServer(s, &janken_service.Server{})
