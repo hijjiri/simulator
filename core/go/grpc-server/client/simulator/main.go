@@ -2,10 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
-	"os"
-	"strconv"
+	"sync"
 	"time"
 
 	pb "github.com/hijjiri/simulator/core/go/grpc-server/simulator"
@@ -25,53 +23,39 @@ func main() {
 	defer conn.Close()
 	client := pb.NewSimulatorServiceClient(conn)
 
-	// デフォルトのシミュレーション回数
-	counts := int32(100)
+	var wg sync.WaitGroup
+	requests := 100 // 100回リクエストを送信
 
-	// コマンドライン引数からシミュレーション回数を取得
-	if len(os.Args) > 1 {
-		count, err := strconv.Atoi(os.Args[1])
-		if err != nil {
-			log.Fatalf("invalid count value: %v", err)
-		}
-		counts = int32(count)
-	}
+	for i := 0; i < requests; i++ {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+			defer cancel()
 
-	// デッキの作成
-	offenseDeck := &pb.Deck{
-		Units: []*pb.DeckUnit{
-			{HeroId: 1, ExtensionIds: []uint32{101, 102}, SkillOrders: []int32{1, 2}, HeroActiveIndex: 1},
-			{HeroId: 2, ExtensionIds: []uint32{201, 202}, SkillOrders: []int32{1, 3}, HeroActiveIndex: 2},
-		},
-	}
-	defenseDeck := &pb.Deck{
-		Units: []*pb.DeckUnit{
-			{HeroId: 3, ExtensionIds: []uint32{301, 302}, SkillOrders: []int32{2, 3}, HeroActiveIndex: 1},
-			{HeroId: 4, ExtensionIds: []uint32{401, 402}, SkillOrders: []int32{1, 2}, HeroActiveIndex: 3},
-		},
-	}
-
-	// gRPCリクエスト
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-	res, err := client.SimulateBattle(ctx, &pb.SimulateRequest{
-		Counts:              counts,
-		SimulateOffenseDeck: offenseDeck,
-		SimulateDefenseDeck: defenseDeck,
-	})
-	if err != nil {
-		log.Fatalf("could not simulate battle: %v", err)
+			_, err := client.SimulateBattle(ctx, &pb.SimulateRequest{
+				Counts: 100,
+				SimulateOffenseDeck: &pb.Deck{
+					Units: []*pb.DeckUnit{
+						{HeroId: 1, ExtensionIds: []uint32{101, 102}, SkillOrders: []int32{1, 2}, HeroActiveIndex: 1},
+						{HeroId: 2, ExtensionIds: []uint32{201, 202}, SkillOrders: []int32{1, 3}, HeroActiveIndex: 2},
+					},
+				},
+				SimulateDefenseDeck: &pb.Deck{
+					Units: []*pb.DeckUnit{
+						{HeroId: 3, ExtensionIds: []uint32{301, 302}, SkillOrders: []int32{2, 3}, HeroActiveIndex: 1},
+						{HeroId: 4, ExtensionIds: []uint32{401, 402}, SkillOrders: []int32{1, 2}, HeroActiveIndex: 3},
+					},
+				},
+			})
+			if err != nil {
+				log.Printf("Request %d failed: %v", i, err)
+			} else {
+				log.Printf("Request %d succeeded", i)
+			}
+		}(i)
 	}
 
-	// 結果のフォーマット
-	fmt.Printf("Battle ID: %v\n", res.GetBattleId())
-	fmt.Printf("Attacker: %v\n", res.GetAttacker())
-	fmt.Printf("Defender: %v\n", res.GetDefender())
-	fmt.Printf("Result Counts:\n")
-	totalWins := 0
-	for k, v := range res.GetResultCounts() {
-		fmt.Printf("  Player %v: %v wins\n", k, v)
-		totalWins += int(v)
-	}
-	fmt.Printf("Total Battles: %v\n", totalWins)
+	wg.Wait()
+	log.Println("All requests completed")
 }
