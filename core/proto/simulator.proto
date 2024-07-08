@@ -10,6 +10,8 @@ service SimulatorService {
 
 message SimulateRequest {
     int32 counts = 1;
+    Deck simulate_offense_deck = 2;
+    Deck simulate_defense_deck = 3;
 }
 
 message SimulateResponse {
@@ -17,4 +19,15 @@ message SimulateResponse {
     uint32 attacker = 2;
     uint32 defender = 3;
     map<uint32, int32> result_counts = 4;
+}
+
+message Deck {
+    repeated DeckUnit units = 1;
+}
+
+message DeckUnit {
+    uint32 hero_id = 1;
+    repeated uint32 extension_ids = 2;
+    repeated int32 skill_orders = 3;
+    int32 hero_active_index = 4;
 }

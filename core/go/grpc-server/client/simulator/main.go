@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -44,6 +45,15 @@ func main() {
 		log.Fatalf("could not simulate battle: %v", err)
 	}
 
-	// レスポンス表示
-	log.Printf("Battle ID: %v, Attacker: %v, Defender: %v, Result Counts: %v", res.GetBattleId(), res.GetAttacker(), res.GetDefender(), res.GetResultCounts())
+	// 結果のフォーマット
+	fmt.Printf("Battle ID: %v\n", res.GetBattleId())
+	fmt.Printf("Attacker: %v\n", res.GetAttacker())
+	fmt.Printf("Defender: %v\n", res.GetDefender())
+	fmt.Printf("Result Counts:\n")
+	totalWins := 0
+	for k, v := range res.GetResultCounts() {
+		fmt.Printf("  Player %v: %v wins\n", k, v)
+		totalWins += int(v)
+	}
+	fmt.Printf("Total Battles: %v\n", totalWins)
 }
