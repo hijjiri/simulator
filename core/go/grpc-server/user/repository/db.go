@@ -5,49 +5,49 @@ import (
 	"errors"
 	"sync"
 
-	u "github.com/hijjiri/simulator/core/go/grpc-server/user"
+	"github.com/hijjiri/simulator/core/go/grpc-server/user"
 )
 
 type InMemoryRepository struct {
 	mu    sync.Mutex
-	users map[uint32]*u.UserData
+	users map[uint32]*user.UserData
 }
 
 func NewInMemoryRepository() *InMemoryRepository {
 	return &InMemoryRepository{
-		users: make(map[uint32]*u.UserData),
+		users: make(map[uint32]*user.UserData),
 	}
 }
 
-func (repo *InMemoryRepository) LockUser(ctx context.Context, uid uint32) (*u.UserData, error) {
+func (repo *InMemoryRepository) LockUser(ctx context.Context, uid uint32) (*user.UserData, error) {
 	repo.mu.Lock()
 	defer repo.mu.Unlock()
 
-	user, exists := repo.users[uid]
+	userData, exists := repo.users[uid]
 	if !exists {
-		user = &u.UserData{Uid: uid}
-		repo.users[uid] = user
+		userData = &user.UserData{Uid: uid}
+		repo.users[uid] = userData
 	}
 
-	if user.Uid == 0 {
+	if userData.IsLocked {
 		return nil, errors.New("user is already locked")
 	}
 
-	// Simulate locking the user by setting Uid to 0
-	user.Uid = 0
-	return user, nil
+	// ロック状態を示すためにis_lockedをtrueに設定
+	userData.IsLocked = true
+	return userData, nil
 }
 
-func (repo *InMemoryRepository) UnlockUser(ctx context.Context, uid uint32) (*u.UserData, error) {
+func (repo *InMemoryRepository) UnlockUser(ctx context.Context, uid uint32) (*user.UserData, error) {
 	repo.mu.Lock()
 	defer repo.mu.Unlock()
 
-	user, exists := repo.users[uid]
+	userData, exists := repo.users[uid]
 	if !exists {
 		return nil, errors.New("user not found")
 	}
 
-	// Simulate unlocking the user by setting Uid to original value
-	user.Uid = uid
-	return user, nil
+	// ロック解除のためにis_lockedをfalseに設定
+	userData.IsLocked = false
+	return userData, nil
 }

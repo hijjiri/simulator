@@ -3,7 +3,6 @@ package simulator
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log"
 	"math/rand"
 	"time"
@@ -17,15 +16,15 @@ type Server struct {
 }
 
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
-	userID := uint32(1001)
+	userID := uint32(1001) // 直接指定されたユーザーID
 	userData, err := user.LockUser(ctx, userID)
 	if err != nil {
 		return nil, err
 	}
 
-	fmt.Println("test", userData.Uid)
+	log.Printf("User ID: %d, Is Locked: %v", userData.Uid, userData.IsLocked)
 
-	if userData.Uid != 0 {
+	if !userData.IsLocked {
 		return nil, errors.New("user is not properly locked")
 	}
 
@@ -46,7 +45,10 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 	}
 
 	// ロック解除
-	user.UnlockUser(ctx, userID)
+	_, unlockErr := user.UnlockUser(ctx, userID)
+	if unlockErr != nil {
+		log.Printf("Failed to unlock user: %v", unlockErr)
+	}
 
 	return &pb.SimulateResponse{
 		BattleId:     battleID,
