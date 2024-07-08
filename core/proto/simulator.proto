@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package simulator;
+
+option go_package = "github.com/hijjiri/simulator/core/go/simulator";
+
+service SimulatorService {
+    rpc SimulateBattle(SimulateRequest) returns (SimulateResponse) {}
+}
+
+message SimulateRequest {
+    int32 counts = 1;
+}
+
+message SimulateResponse {
+    uint32 battle_id = 1;
+    uint32 attacker = 2;
+    uint32 defender = 3;
+    map<uint32, int32> result_counts = 4;
+}
