@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package example;
 
-option go_package = "github.com/hijjiri/simulator/core/example";
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/example";
 
 message HelloRequest {
   string name = 1;

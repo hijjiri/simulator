@@ -9,6 +9,8 @@ import (
 	example_service "github.com/hijjiri/simulator/core/go/grpc-server/example/service"
 	pb_janken "github.com/hijjiri/simulator/core/go/grpc-server/janken"
 	janken_service "github.com/hijjiri/simulator/core/go/grpc-server/janken/service"
+	pb_simulator "github.com/hijjiri/simulator/core/go/grpc-server/simulator"
+	simulator_service "github.com/hijjiri/simulator/core/go/grpc-server/simulator/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -26,6 +28,7 @@ func main() {
 	s := grpc.NewServer()
 	pb_example.RegisterExampleServiceServer(s, &example_service.Server{})
 	pb_janken.RegisterJankenServiceServer(s, &janken_service.Server{})
+	pb_simulator.RegisterSimulatorServiceServer(s, &simulator_service.Server{})
 	reflection.Register(s)
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {

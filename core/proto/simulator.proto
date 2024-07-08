@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package simulator;
 
-option go_package = "github.com/hijjiri/simulator/core/go/simulator";
+option go_package = "github.com/hijjiri/simulator/core/go/grpc-server/simulator";
 
 service SimulatorService {
     rpc SimulateBattle(SimulateRequest) returns (SimulateResponse) {}

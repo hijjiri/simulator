@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package battle;
 
-option go_package = "github.com/hijjiri/simulator/core/battle";
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/battle";
 
 import "google/api/annotations.proto";
 
