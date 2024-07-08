@@ -1,4 +1,4 @@
-package service
+package simulator
 
 import (
 	"context"
@@ -14,7 +14,10 @@ type Server struct {
 
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
 	log.Printf("Simulating battle %d times", in.GetCounts())
+	log.Printf("Offense Deck: %v", in.GetSimulateOffenseDeck().GetUnits())
+	log.Printf("Defense Deck: %v", in.GetSimulateDefenseDeck().GetUnits())
 
+	// シミュレーションの結果を生成
 	rand.Seed(time.Now().UnixNano())
 	battleID := rand.Uint32()
 	attacker := rand.Uint32()

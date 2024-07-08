@@ -4,6 +4,8 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/signal"
+	"syscall"
 
 	pb_example "github.com/hijjiri/simulator/core/go/grpc-server/example"
 	example_service "github.com/hijjiri/simulator/core/go/grpc-server/example/service"
@@ -31,7 +33,20 @@ func main() {
 	pb_simulator.RegisterSimulatorServiceServer(s, &simulator_service.Server{})
 	reflection.Register(s)
 	log.Printf("server listening at %v", lis.Addr())
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
+
+	// Graceful shutdown
+	go func() {
+		if err := s.Serve(lis); err != nil {
+			log.Fatalf("failed to serve: %v", err)
+		}
+	}()
+
+	// Catch shutdown signals
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+	<-ch
+
+	log.Println("stopping server...")
+	s.GracefulStop()
+	log.Println("server stopped")
 }
