@@ -12,42 +12,49 @@ import (
 	"github.com/hijjiri/simulator/core/go/grpc-server/user"
 )
 
+// 定数とグローバル変数の定義
 const (
-	workerNum = 10
-	queueSize = 100
+	workerNum = 10  // ワーカーの数
+	queueSize = 100 // リクエストキューのサイズ
 )
 
-var requestQueue chan func()
+var requestQueue chan func() // リクエストキューを保持するチャネル
 
+// init関数
 func init() {
-	requestQueue = make(chan func(), queueSize)
-	for i := 0; i < workerNum; i++ {
-		go worker()
+	requestQueue = make(chan func(), queueSize) // リクエストキューの初期化
+	for i := 0; i < workerNum; i++ {            // ワーカーの数だけゴルーチンを起動
+		go worker() // 各ワーカーゴルーチンを起動
 	}
 }
 
+// ワーカーファンクション
 func worker() {
-	for req := range requestQueue {
-		req()
+	for req := range requestQueue { // リクエストキューからリクエストを受け取る
+		req() // リクエストを処理
 	}
 }
 
+// Server構造体の定義
 type Server struct {
 	pb.UnimplementedSimulatorServiceServer
 }
 
+// SimulateBattle関数
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
-	resultCh := make(chan *pb.SimulateResponse, 1)
-	errorCh := make(chan error, 1)
+	resultCh := make(chan *pb.SimulateResponse, 1) // 結果を受け取るチャネル
+	errorCh := make(chan error, 1)                 // エラーを受け取るチャネル
 
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(1) // ワーカーグループに1つのワーカーを追加
 
-	requestQueue <- func() {
-		defer wg.Done()
+	requestQueue <- func() { // リクエストキューにリクエストを追加
+		defer wg.Done() // 関数の終了時にワーカーグループから1つのワーカーを削除
 
+		// ユーザーIDをランダムに生成
 		rand.Seed(time.Now().UnixNano())
 		userID := rand.Uint32()
+
 		userData, err := user.LockUser(ctx, userID)
 		if err != nil {
 			errorCh <- err
@@ -65,6 +72,7 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		log.Printf("Offense Deck: %v", in.GetSimulateOffenseDeck().GetUnits())
 		log.Printf("Defense Deck: %v", in.GetSimulateDefenseDeck().GetUnits())
 
+		// シミュレーションの結果を生成
 		rand.Seed(time.Now().UnixNano())
 		battleID := rand.Uint32()
 		attacker := rand.Uint32()
@@ -76,6 +84,7 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 			resultCounts[winner]++
 		}
 
+		// ロック解除
 		_, unlockErr := user.UnlockUser(ctx, userID)
 		if unlockErr != nil {
 			log.Printf("Failed to unlock user: %v", unlockErr)
@@ -89,12 +98,14 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		}
 	}
 
+	// ゴルーチンでワーカーグループの完了を待つ
 	go func() {
-		wg.Wait()
+		wg.Wait() // ワーカーグループがすべて完了するのを待つ
 		close(resultCh)
 		close(errorCh)
 	}()
 
+	// select文で結果またはエラーのいずれかを待つ
 	select {
 	case res := <-resultCh:
 		return res, nil
