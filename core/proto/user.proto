@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/user";
+
+message UserData {
+    uint32 uid = 1;
+    bool is_locked = 2;
+}
