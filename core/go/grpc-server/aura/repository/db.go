@@ -7,37 +7,32 @@ import (
 	"github.com/hijjiri/simulator/core/go/grpc-server/aura"
 )
 
-// インメモリキャッシュのためのマップとミューテックス
-var (
-	cacheAuraTypesMap = make(map[uint32]*aura.AuraTypeMaster)
-	mu                sync.Mutex
-)
+type InMemoryRepository struct {
+	mu    sync.Mutex
+	cache map[uint32]*aura.AuraTypeMaster
+}
 
-// DatastoreRepository構造体の定義
-type DatastoreRepository struct{}
+func NewInMemoryRepository() *InMemoryRepository {
+	return &InMemoryRepository{
+		cache: make(map[uint32]*aura.AuraTypeMaster),
+	}
+}
 
-// GetAuraTypeMaster関数の実装
-func (r *DatastoreRepository) GetAuraTypeMaster(auraType uint32) (*aura.AuraTypeMaster, error) {
-	mu.Lock()         // ミューテックスをロック
-	defer mu.Unlock() // 関数終了時にミューテックスをアンロック
+func (r *InMemoryRepository) GetAuraTypeMaster(auraType uint32) (*aura.AuraTypeMaster, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
 
-	auraTypeMaster, ok := cacheAuraTypesMap[auraType]
+	auraTypeMaster, ok := r.cache[auraType]
 	if !ok {
 		return nil, fmt.Errorf("aura type not found auraType=%v", auraType)
 	}
 	return auraTypeMaster, nil
 }
 
-// NewDatastoreRepository関数の実装
-func NewDatastoreRepository() *DatastoreRepository {
-	return &DatastoreRepository{}
-}
-
-// InitializeAuraTypes関数の実装
-func InitializeAuraTypes(auraTypes map[uint32]*aura.AuraTypeMaster) {
-	mu.Lock()         // ミューテックスをロック
-	defer mu.Unlock() // 関数終了時にミューテックスをアンロック
+func (r *InMemoryRepository) InitializeAuraTypes(auraTypes map[uint32]*aura.AuraTypeMaster) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
 	for id, auraType := range auraTypes {
-		cacheAuraTypesMap[id] = auraType
+		r.cache[id] = auraType
 	}
 }

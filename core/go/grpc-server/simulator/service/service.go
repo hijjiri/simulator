@@ -44,8 +44,6 @@ type Server struct {
 }
 
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
-	log.Printf("Received SimulateBattle request: %v", in)
-
 	resultCh := make(chan *pb.SimulateResponse, 1)
 	errorCh := make(chan error, 1)
 
@@ -54,7 +52,6 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 
 	requestQueue <- func() {
 		defer wg.Done()
-		log.Println("Processing request in worker")
 
 		// ユーザーIDをランダムに生成
 		rand.Seed(time.Now().UnixNano())
@@ -63,22 +60,23 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		userData, err := user.LockUser(ctx, userID)
 		if err != nil {
 			errorCh <- err
-			log.Printf("Error locking user: %v", err)
 			return
 		}
 
 		log.Printf("User ID: %d, Is Locked: %v", userData.Uid, userData.IsLocked)
 
 		if !userData.IsLocked {
-			err := errors.New("user is not properly locked")
-			errorCh <- err
-			log.Println(err)
+			errorCh <- errors.New("user is not properly locked")
 			return
 		}
 
 		log.Printf("Simulating battle %d times", in.GetCounts())
 		log.Printf("Offense Deck: %v", in.GetSimulateOffenseDeck().GetUnits())
 		log.Printf("Defense Deck: %v", in.GetSimulateDefenseDeck().GetUnits())
+
+		// gRPCから受け取ったDeckUnitデータを変換
+		offenseDeckUnits := convertDeckUnits(in.GetSimulateOffenseDeck().GetUnits())
+		defenseDeckUnits := convertDeckUnits(in.GetSimulateDefenseDeck().GetUnits())
 
 		// シミュレーションの結果を生成
 		rand.Seed(time.Now().UnixNano())
@@ -88,43 +86,33 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		resultCounts := make(map[uint32]int32)
 
 		// NewBattleUnitFromDeck
-		offenseUnits, err := createBattleUnits(ctx, convertDeckUnits(in.GetSimulateOffenseDeck().GetUnits()), true)
+		offenseUnits, err := createBattleUnits(ctx, offenseDeckUnits, true)
 		if err != nil {
 			errorCh <- err
-			log.Printf("Error creating offense units: %v", err)
 			return
 		}
-		log.Println("Created offense units")
 
-		defenseUnits, err := createBattleUnits(ctx, convertDeckUnits(in.GetSimulateDefenseDeck().GetUnits()), false)
+		defenseUnits, err := createBattleUnits(ctx, defenseDeckUnits, false)
 		if err != nil {
 			errorCh <- err
-			log.Printf("Error creating defense units: %v", err)
 			return
 		}
-		log.Println("Created defense units")
 
 		units := append(offenseUnits, defenseUnits...)
 		if len(units) < 6 {
-			err := fmt.Errorf("units number not enough %v", len(units))
-			errorCh <- err
-			log.Println(err)
+			errorCh <- fmt.Errorf("units number not enough %v", len(units))
 			return
 		}
-		log.Println("Units are sufficient")
 
 		for i := 0; i < int(in.GetCounts()); i++ {
 			winner := rand.Uint32()
 			resultCounts[winner]++
 		}
-		log.Println("Battle simulation completed")
 
 		// ロック解除
 		_, unlockErr := user.UnlockUser(ctx, userID)
 		if unlockErr != nil {
 			log.Printf("Failed to unlock user: %v", unlockErr)
-		} else {
-			log.Printf("User %d unlocked successfully", userID)
 		}
 
 		resultCh <- &pb.SimulateResponse{
@@ -133,7 +121,6 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 			Defender:     defender,
 			ResultCounts: resultCounts,
 		}
-		log.Println("SimulateBattle response sent")
 	}
 
 	// ゴルーチンでワーカーグループの完了を待つ
@@ -141,18 +128,14 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		wg.Wait()
 		close(resultCh)
 		close(errorCh)
-		log.Println("Worker group completed")
 	}()
 
 	select {
 	case res := <-resultCh:
-		log.Println("Returning SimulateBattle response")
 		return res, nil
 	case err := <-errorCh:
-		log.Printf("Error occurred: %v", err)
 		return nil, err
 	case <-ctx.Done():
-		log.Println("Context done")
 		return nil, ctx.Err()
 	}
 }
@@ -163,15 +146,21 @@ func createBattleUnits(ctx context.Context, deckUnits []*d.DeckUnit, isAttacker 
 	for i, deckUnit := range deckUnits {
 		position := int32(i)
 		heroData := createHeroData(deckUnit.HeroId)
+		log.Printf("\n\n--- Created HeroData ---\n%+v\n", heroData)
+
 		extension1 := createExtensionData(deckUnit.ExtensionIds[0])
+		log.Printf("--- Created ExtensionData ---\n%+v\n", extension1)
+
 		extension2 := createExtensionData(deckUnit.ExtensionIds[1])
+		log.Printf("--- Created ExtensionData ---\n%+v\n", extension2)
+
 		cryptidInfo := &lc.CryptidInfo{}
 		auras := []*au.AuraEffect{}
 		contentType := "simulator"
 
-		log.Printf("Creating unit at position %d with heroData: %v, extension1: %v, extension2: %v", position, heroData, extension1, extension2)
+		log.Printf("\nCreating unit at position %d\nHeroData: %+v\nExtension1: %+v\nExtension2: %+v\n", position, heroData, extension1, extension2)
+
 		units[i] = b.NewBattleUnitFromDeck(position, deckUnit, heroData, extension1, extension2, cryptidInfo, auras, deckUnit.SkillOrders, deckUnit.HeroActiveIndex, contentType)
-		log.Printf("Created unit at position %d: %v", position, units[i])
 	}
 
 	return units, nil
@@ -217,6 +206,7 @@ func createExtensionData(extensionId uint32) *e.ExtensionData {
 			Agi: 10,
 		},
 		Active: 1,
+		Aura:   11,
 	}
 	log.Printf("Created ExtensionData: %v", extensionData)
 	return extensionData
