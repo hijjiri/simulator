@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package aura;
+
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/aura";
+
+message AuraEffect {
+    uint32 aura_type = 1;
+    int32 effect_value = 2;
+    int32 secondary_value = 3;
+    int32 shortage = 4;
+    bool is_active = 5;
+}
+
+message AuraTypeMaster {
+    uint32 aura_type = 1;
+    repeated uint32 attribute_types = 2;
+    Parameter color = 3;
+    uint32 hero_type = 4;
+    int32 required = 5;
+    Param numeric_condition = 6;
+    CalculationMethod effect = 7;
+    CalculationMethod secondary = 8;
+    Occasions occasions = 9;
+    Trigger trigger = 10;
+}
+
+message Param {
+    int32 hp = 1;
+    int32 phy = 2;
+    int32 int = 3;
+    int32 agi = 4;
+}
+
+message CalculationMethod {
+    CalculationType method = 1;
+    Parameter parameter = 2;
+    float coefficient = 3;
+    int32 intercept = 4;
+}
+
+enum CalculationType {
+    NONE = 0;
+    LINEAR = 1;
+    QUADRATIC = 2;
+}
+
+enum Parameter {
+    NOTHING = 0;
+    HP = 1;
+    PHY = 2;
+    INT = 3;
+    AGI = 4;
+}
+
+enum Occasions {
+    BATTLE = 0;
+    QUEST = 1;
+    CP_MINING = 2;
+}
+
+enum Trigger {
+    DURING = 0;
+    BEFORE = 1;
+}
+
+message AuraEffects {
+    repeated AuraEffect aura_effects = 1;
+}
