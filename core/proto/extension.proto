@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package extension;
+
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/extension";
+
+message ExtensionData {
+    uint32 extension_id = 1;
+    uint32 extension_type = 2;
+    Param param = 3;
+    Param trend = 4;
+    uint32 active = 5;
+    Lock lock = 6;
+    enum Lock {
+        NONE = 0;
+        ADMIN = 1;
+        DECK = 2;
+        TRADE = 3;
+        CRAFT = 4;
+        OUTSOURCING = 5;
+    }
+    repeated string title = 7;
+    uint32 land_type = 8;
+    int64 lock_until = 9;
+}
+
+message Param {
+    int32 hp = 1;
+    int32 phy = 2;
+    int32 int = 3;
+    int32 agi = 4;
+}
+
+message Empty {}

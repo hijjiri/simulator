@@ -4,10 +4,6 @@ package hero;
 
 option go_package = "github.com/hijjiri/simulator/core/grpc-server/hero";
 
-service HeroService {
-    rpc SaveIpfsSkillStock(Empty) returns (HeroTypeMaster) {}
-}
-
 message HeroTypeMaster {
     uint32 hero_type = 1;
     bool asset = 2;
