@@ -5351,7 +5351,11 @@ proto.battle.Aura.Effect.Param = {
   HP: 1,
   PHY: 2,
   INT: 3,
-  AGI: 4
+  AGI: 4,
+  INITIAL_HP: 5,
+  INITIAL_PHY: 6,
+  INITIAL_INT: 7,
+  INITIAL_AGI: 8
 };
 
 /**
