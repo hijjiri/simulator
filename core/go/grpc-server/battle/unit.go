@@ -6,9 +6,9 @@ import (
 	h "github.com/hijjiri/simulator/core/go/grpc-server/hero"
 )
 
-func NewBattleUnitFromDeckV2(position int32, u *d.DeckUnit, h *h.HeroData, e1, e2 *e.ExtensionData, skillOrders []int32, heroActiveIndex int32, contentType string) *Unit {
+func NewBattleUnitFromDeck(position int32, u *d.DeckUnit, h *h.HeroData, e1, e2 *e.ExtensionData, skillOrders []int32, heroActiveIndex int32, contentType string) *Unit {
 	// アクティブインデックスを調整
-	// u.HeroActiveIndex = adjustHeroActiveIndex(u.HeroActiveIndex, h.StockedSkillIds)
+	u.HeroActiveIndex = adjustHeroActiveIndex(u.HeroActiveIndex, h.StockedSkillIds)
 
 	// スキルのセット
 	// actives := setActiveSkills(u, h, e1, e2)
@@ -45,19 +45,19 @@ func setActiveSkills(u *d.DeckUnit, h *h.HeroData, e1 *e.ExtensionData, e2 *e.Ex
 }
 
 // func calculateBaseParams(h *h.HeroData, e1 *e.ExtensionData, e2 *e.ExtensionData, cryptidInfo *lc.CryptidInfo) (int32, int32, int32, int32) {
-// hp := h.Param.Hp + e1.Param.Hp + e2.Param.Hp + effectsMap[Aura_Effect_INITIAL_HP]
-// phy := h.Param.Phy + e1.Param.Phy + e2.Param.Phy + effectsMap[Aura_Effect_INITIAL_PHY]
-// intl := h.Param.Int + e1.Param.Int + e2.Param.Int + effectsMap[Aura_Effect_INITIAL_INT]
-// agi := h.Param.Agi + e1.Param.Agi + e2.Param.Agi + effectsMap[Aura_Effect_INITIAL_AGI]
+// 	hp := h.Param.Hp + e1.Param.Hp + e2.Param.Hp + effectsMap[Aura_Effect_INITIAL_HP]
+// 	phy := h.Param.Phy + e1.Param.Phy + e2.Param.Phy + effectsMap[Aura_Effect_INITIAL_PHY]
+// 	intl := h.Param.Int + e1.Param.Int + e2.Param.Int + effectsMap[Aura_Effect_INITIAL_INT]
+// 	agi := h.Param.Agi + e1.Param.Agi + e2.Param.Agi + effectsMap[Aura_Effect_INITIAL_AGI]
 
-// if cryptidInfo != nil {
-// 	hp = hp * (1000 + cryptidInfo.Hp.BuffRate1000) / 1000
-// 	phy = phy * (1000 + cryptidInfo.Phy.BuffRate1000) / 1000
-// 	intl = intl * (1000 + cryptidInfo.Int.BuffRate1000) / 1000
-// 	agi = agi * (1000 + cryptidInfo.Agi.BuffRate1000) / 1000
-// }
+// 	if cryptidInfo != nil {
+// 		hp = hp * (1000 + cryptidInfo.Hp.BuffRate1000) / 1000
+// 		phy = phy * (1000 + cryptidInfo.Phy.BuffRate1000) / 1000
+// 		intl = intl * (1000 + cryptidInfo.Int.BuffRate1000) / 1000
+// 		agi = agi * (1000 + cryptidInfo.Agi.BuffRate1000) / 1000
+// 	}
 
-// return hp, phy, intl, agi
+// 	return hp, phy, intl, agi
 // }
 
 // func calculateRecoveryRate(cryptidInfo *lc.CryptidInfo) map[int32]int32 {

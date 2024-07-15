@@ -398,6 +398,556 @@ func (EnchantInfo_Enchant) EnumDescriptor() ([]byte, []int) {
 	return file_battle_proto_rawDescGZIP(), []int{6, 0}
 }
 
+type Skill_Condition int32
+
+const (
+	Skill_NONE    Skill_Condition = 0
+	Skill_ACTIVE  Skill_Condition = 1
+	Skill_OPENING Skill_Condition = 2
+	Skill_COUNTER Skill_Condition = 3
+	Skill_SELF_HP Skill_Condition = 4
+)
+
+// Enum value maps for Skill_Condition.
+var (
+	Skill_Condition_name = map[int32]string{
+		0: "NONE",
+		1: "ACTIVE",
+		2: "OPENING",
+		3: "COUNTER",
+		4: "SELF_HP",
+	}
+	Skill_Condition_value = map[string]int32{
+		"NONE":    0,
+		"ACTIVE":  1,
+		"OPENING": 2,
+		"COUNTER": 3,
+		"SELF_HP": 4,
+	}
+)
+
+func (x Skill_Condition) Enum() *Skill_Condition {
+	p := new(Skill_Condition)
+	*p = x
+	return p
+}
+
+func (x Skill_Condition) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Skill_Condition) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[6].Descriptor()
+}
+
+func (Skill_Condition) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[6]
+}
+
+func (x Skill_Condition) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Skill_Condition.Descriptor instead.
+func (Skill_Condition) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0}
+}
+
+type Skill_Effect_Target int32
+
+const (
+	Skill_Effect_SELF        Skill_Effect_Target = 0
+	Skill_Effect_ENEMY_FIRST Skill_Effect_Target = 1
+	Skill_Effect_ENEMY_ALL   Skill_Effect_Target = 2
+	Skill_Effect_ALLY_FIRST  Skill_Effect_Target = 3
+	Skill_Effect_ALLY_ALL    Skill_Effect_Target = 4
+)
+
+// Enum value maps for Skill_Effect_Target.
+var (
+	Skill_Effect_Target_name = map[int32]string{
+		0: "SELF",
+		1: "ENEMY_FIRST",
+		2: "ENEMY_ALL",
+		3: "ALLY_FIRST",
+		4: "ALLY_ALL",
+	}
+	Skill_Effect_Target_value = map[string]int32{
+		"SELF":        0,
+		"ENEMY_FIRST": 1,
+		"ENEMY_ALL":   2,
+		"ALLY_FIRST":  3,
+		"ALLY_ALL":    4,
+	}
+)
+
+func (x Skill_Effect_Target) Enum() *Skill_Effect_Target {
+	p := new(Skill_Effect_Target)
+	*p = x
+	return p
+}
+
+func (x Skill_Effect_Target) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Skill_Effect_Target) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[7].Descriptor()
+}
+
+func (Skill_Effect_Target) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[7]
+}
+
+func (x Skill_Effect_Target) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Skill_Effect_Target.Descriptor instead.
+func (Skill_Effect_Target) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0, 0}
+}
+
+type Skill_Effect_Param int32
+
+const (
+	Skill_Effect_NONE Skill_Effect_Param = 0
+	Skill_Effect_HP   Skill_Effect_Param = 1
+	Skill_Effect_PHY  Skill_Effect_Param = 2
+	Skill_Effect_INT  Skill_Effect_Param = 3
+	Skill_Effect_AGI  Skill_Effect_Param = 4
+)
+
+// Enum value maps for Skill_Effect_Param.
+var (
+	Skill_Effect_Param_name = map[int32]string{
+		0: "NONE",
+		1: "HP",
+		2: "PHY",
+		3: "INT",
+		4: "AGI",
+	}
+	Skill_Effect_Param_value = map[string]int32{
+		"NONE": 0,
+		"HP":   1,
+		"PHY":  2,
+		"INT":  3,
+		"AGI":  4,
+	}
+)
+
+func (x Skill_Effect_Param) Enum() *Skill_Effect_Param {
+	p := new(Skill_Effect_Param)
+	*p = x
+	return p
+}
+
+func (x Skill_Effect_Param) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Skill_Effect_Param) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[8].Descriptor()
+}
+
+func (Skill_Effect_Param) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[8]
+}
+
+func (x Skill_Effect_Param) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Skill_Effect_Param.Descriptor instead.
+func (Skill_Effect_Param) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0, 1}
+}
+
+type Skill_Effect_Calc int32
+
+const (
+	Skill_Effect_MY_PHY               Skill_Effect_Calc = 0
+	Skill_Effect_MY_INT               Skill_Effect_Calc = 1
+	Skill_Effect_MY_AGI               Skill_Effect_Calc = 2
+	Skill_Effect_MY_INT_YOUR_PHY      Skill_Effect_Calc = 3 // 回復係数
+	Skill_Effect_MY_DAMAGED_IN_ACTION Skill_Effect_Calc = 4
+)
+
+// Enum value maps for Skill_Effect_Calc.
+var (
+	Skill_Effect_Calc_name = map[int32]string{
+		0: "MY_PHY",
+		1: "MY_INT",
+		2: "MY_AGI",
+		3: "MY_INT_YOUR_PHY",
+		4: "MY_DAMAGED_IN_ACTION",
+	}
+	Skill_Effect_Calc_value = map[string]int32{
+		"MY_PHY":               0,
+		"MY_INT":               1,
+		"MY_AGI":               2,
+		"MY_INT_YOUR_PHY":      3,
+		"MY_DAMAGED_IN_ACTION": 4,
+	}
+)
+
+func (x Skill_Effect_Calc) Enum() *Skill_Effect_Calc {
+	p := new(Skill_Effect_Calc)
+	*p = x
+	return p
+}
+
+func (x Skill_Effect_Calc) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Skill_Effect_Calc) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[9].Descriptor()
+}
+
+func (Skill_Effect_Calc) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[9]
+}
+
+func (x Skill_Effect_Calc) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Skill_Effect_Calc.Descriptor instead.
+func (Skill_Effect_Calc) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0, 2}
+}
+
+type Skill_Effect_AdditionalCalc int32
+
+const (
+	Skill_Effect_NO_ADDITIONAL  Skill_Effect_AdditionalCalc = 0
+	Skill_Effect_POISON_UNIT    Skill_Effect_AdditionalCalc = 1
+	Skill_Effect_SLEEP_UNIT     Skill_Effect_AdditionalCalc = 2
+	Skill_Effect_CONFUSION_UNIT Skill_Effect_AdditionalCalc = 3
+	Skill_Effect_FEAR_UNIT      Skill_Effect_AdditionalCalc = 4
+)
+
+// Enum value maps for Skill_Effect_AdditionalCalc.
+var (
+	Skill_Effect_AdditionalCalc_name = map[int32]string{
+		0: "NO_ADDITIONAL",
+		1: "POISON_UNIT",
+		2: "SLEEP_UNIT",
+		3: "CONFUSION_UNIT",
+		4: "FEAR_UNIT",
+	}
+	Skill_Effect_AdditionalCalc_value = map[string]int32{
+		"NO_ADDITIONAL":  0,
+		"POISON_UNIT":    1,
+		"SLEEP_UNIT":     2,
+		"CONFUSION_UNIT": 3,
+		"FEAR_UNIT":      4,
+	}
+)
+
+func (x Skill_Effect_AdditionalCalc) Enum() *Skill_Effect_AdditionalCalc {
+	p := new(Skill_Effect_AdditionalCalc)
+	*p = x
+	return p
+}
+
+func (x Skill_Effect_AdditionalCalc) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Skill_Effect_AdditionalCalc) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[10].Descriptor()
+}
+
+func (Skill_Effect_AdditionalCalc) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[10]
+}
+
+func (x Skill_Effect_AdditionalCalc) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Skill_Effect_AdditionalCalc.Descriptor instead.
+func (Skill_Effect_AdditionalCalc) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0, 3}
+}
+
+type Aura_Condition int32
+
+const (
+	Aura_NONE    Aura_Condition = 0
+	Aura_ACTIVE  Aura_Condition = 1
+	Aura_OPENING Aura_Condition = 2
+	Aura_COUNTER Aura_Condition = 3
+	Aura_SELF_HP Aura_Condition = 4
+)
+
+// Enum value maps for Aura_Condition.
+var (
+	Aura_Condition_name = map[int32]string{
+		0: "NONE",
+		1: "ACTIVE",
+		2: "OPENING",
+		3: "COUNTER",
+		4: "SELF_HP",
+	}
+	Aura_Condition_value = map[string]int32{
+		"NONE":    0,
+		"ACTIVE":  1,
+		"OPENING": 2,
+		"COUNTER": 3,
+		"SELF_HP": 4,
+	}
+)
+
+func (x Aura_Condition) Enum() *Aura_Condition {
+	p := new(Aura_Condition)
+	*p = x
+	return p
+}
+
+func (x Aura_Condition) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Aura_Condition) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[11].Descriptor()
+}
+
+func (Aura_Condition) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[11]
+}
+
+func (x Aura_Condition) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Aura_Condition.Descriptor instead.
+func (Aura_Condition) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 0}
+}
+
+type Aura_Type int32
+
+const (
+	Aura_NORMAL           Aura_Type = 0
+	Aura_EFFECT           Aura_Type = 1
+	Aura_SECONDARY        Aura_Type = 2
+	Aura_SECONDARY_EFFECT Aura_Type = 3
+	Aura_CONDITION        Aura_Type = 4
+)
+
+// Enum value maps for Aura_Type.
+var (
+	Aura_Type_name = map[int32]string{
+		0: "NORMAL",
+		1: "EFFECT",
+		2: "SECONDARY",
+		3: "SECONDARY_EFFECT",
+		4: "CONDITION",
+	}
+	Aura_Type_value = map[string]int32{
+		"NORMAL":           0,
+		"EFFECT":           1,
+		"SECONDARY":        2,
+		"SECONDARY_EFFECT": 3,
+		"CONDITION":        4,
+	}
+)
+
+func (x Aura_Type) Enum() *Aura_Type {
+	p := new(Aura_Type)
+	*p = x
+	return p
+}
+
+func (x Aura_Type) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Aura_Type) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[12].Descriptor()
+}
+
+func (Aura_Type) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[12]
+}
+
+func (x Aura_Type) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Aura_Type.Descriptor instead.
+func (Aura_Type) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 1}
+}
+
+type Aura_Effect_Target int32
+
+const (
+	Aura_Effect_SELF        Aura_Effect_Target = 0
+	Aura_Effect_ENEMY_FIRST Aura_Effect_Target = 1
+	Aura_Effect_ENEMY_ALL   Aura_Effect_Target = 2
+	Aura_Effect_ALLY_FIRST  Aura_Effect_Target = 3
+	Aura_Effect_ALLY_ALL    Aura_Effect_Target = 4
+)
+
+// Enum value maps for Aura_Effect_Target.
+var (
+	Aura_Effect_Target_name = map[int32]string{
+		0: "SELF",
+		1: "ENEMY_FIRST",
+		2: "ENEMY_ALL",
+		3: "ALLY_FIRST",
+		4: "ALLY_ALL",
+	}
+	Aura_Effect_Target_value = map[string]int32{
+		"SELF":        0,
+		"ENEMY_FIRST": 1,
+		"ENEMY_ALL":   2,
+		"ALLY_FIRST":  3,
+		"ALLY_ALL":    4,
+	}
+)
+
+func (x Aura_Effect_Target) Enum() *Aura_Effect_Target {
+	p := new(Aura_Effect_Target)
+	*p = x
+	return p
+}
+
+func (x Aura_Effect_Target) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Aura_Effect_Target) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[13].Descriptor()
+}
+
+func (Aura_Effect_Target) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[13]
+}
+
+func (x Aura_Effect_Target) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Aura_Effect_Target.Descriptor instead.
+func (Aura_Effect_Target) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 0, 0}
+}
+
+type Aura_Effect_Param int32
+
+const (
+	Aura_Effect_NONE Aura_Effect_Param = 0
+	Aura_Effect_HP   Aura_Effect_Param = 1
+	Aura_Effect_PHY  Aura_Effect_Param = 2
+	Aura_Effect_INT  Aura_Effect_Param = 3
+	Aura_Effect_AGI  Aura_Effect_Param = 4
+)
+
+// Enum value maps for Aura_Effect_Param.
+var (
+	Aura_Effect_Param_name = map[int32]string{
+		0: "NONE",
+		1: "HP",
+		2: "PHY",
+		3: "INT",
+		4: "AGI",
+	}
+	Aura_Effect_Param_value = map[string]int32{
+		"NONE": 0,
+		"HP":   1,
+		"PHY":  2,
+		"INT":  3,
+		"AGI":  4,
+	}
+)
+
+func (x Aura_Effect_Param) Enum() *Aura_Effect_Param {
+	p := new(Aura_Effect_Param)
+	*p = x
+	return p
+}
+
+func (x Aura_Effect_Param) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Aura_Effect_Param) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[14].Descriptor()
+}
+
+func (Aura_Effect_Param) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[14]
+}
+
+func (x Aura_Effect_Param) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Aura_Effect_Param.Descriptor instead.
+func (Aura_Effect_Param) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 0, 1}
+}
+
+type Aura_Effect_Calc int32
+
+const (
+	Aura_Effect_MY_PHY               Aura_Effect_Calc = 0
+	Aura_Effect_MY_INT               Aura_Effect_Calc = 1
+	Aura_Effect_MY_AGI               Aura_Effect_Calc = 2
+	Aura_Effect_MY_INT_YOUR_PHY      Aura_Effect_Calc = 3
+	Aura_Effect_MY_DAMAGED_IN_ACTION Aura_Effect_Calc = 4
+)
+
+// Enum value maps for Aura_Effect_Calc.
+var (
+	Aura_Effect_Calc_name = map[int32]string{
+		0: "MY_PHY",
+		1: "MY_INT",
+		2: "MY_AGI",
+		3: "MY_INT_YOUR_PHY",
+		4: "MY_DAMAGED_IN_ACTION",
+	}
+	Aura_Effect_Calc_value = map[string]int32{
+		"MY_PHY":               0,
+		"MY_INT":               1,
+		"MY_AGI":               2,
+		"MY_INT_YOUR_PHY":      3,
+		"MY_DAMAGED_IN_ACTION": 4,
+	}
+)
+
+func (x Aura_Effect_Calc) Enum() *Aura_Effect_Calc {
+	p := new(Aura_Effect_Calc)
+	*p = x
+	return p
+}
+
+func (x Aura_Effect_Calc) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Aura_Effect_Calc) Descriptor() protoreflect.EnumDescriptor {
+	return file_battle_proto_enumTypes[15].Descriptor()
+}
+
+func (Aura_Effect_Calc) Type() protoreflect.EnumType {
+	return &file_battle_proto_enumTypes[15]
+}
+
+func (x Aura_Effect_Calc) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Aura_Effect_Calc.Descriptor instead.
+func (Aura_Effect_Calc) EnumDescriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 0, 2}
+}
+
 type BattleId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1367,6 +1917,188 @@ func (x *EnchantInfo) GetRate() int32 {
 	return 0
 }
 
+type Skill struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SkillId       uint32          `protobuf:"varint,1,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	Condition     Skill_Condition `protobuf:"varint,2,opt,name=condition,proto3,enum=battle.Skill_Condition" json:"condition,omitempty"`
+	ConditionRate int32           `protobuf:"varint,3,opt,name=condition_rate,json=conditionRate,proto3" json:"condition_rate,omitempty"`
+	Effects       []*Skill_Effect `protobuf:"bytes,4,rep,name=effects,proto3" json:"effects,omitempty"`
+	SecondaryRate int32           `protobuf:"varint,5,opt,name=secondary_rate,json=secondaryRate,proto3" json:"secondary_rate,omitempty"`
+	EnchantInfos  []*EnchantInfo  `protobuf:"bytes,6,rep,name=enchant_infos,json=enchantInfos,proto3" json:"enchant_infos,omitempty"`
+}
+
+func (x *Skill) Reset() {
+	*x = Skill{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_battle_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Skill) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Skill) ProtoMessage() {}
+
+func (x *Skill) ProtoReflect() protoreflect.Message {
+	mi := &file_battle_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Skill.ProtoReflect.Descriptor instead.
+func (*Skill) Descriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Skill) GetSkillId() uint32 {
+	if x != nil {
+		return x.SkillId
+	}
+	return 0
+}
+
+func (x *Skill) GetCondition() Skill_Condition {
+	if x != nil {
+		return x.Condition
+	}
+	return Skill_NONE
+}
+
+func (x *Skill) GetConditionRate() int32 {
+	if x != nil {
+		return x.ConditionRate
+	}
+	return 0
+}
+
+func (x *Skill) GetEffects() []*Skill_Effect {
+	if x != nil {
+		return x.Effects
+	}
+	return nil
+}
+
+func (x *Skill) GetSecondaryRate() int32 {
+	if x != nil {
+		return x.SecondaryRate
+	}
+	return 0
+}
+
+func (x *Skill) GetEnchantInfos() []*EnchantInfo {
+	if x != nil {
+		return x.EnchantInfos
+	}
+	return nil
+}
+
+type Aura struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AuraId         uint32         `protobuf:"varint,1,opt,name=aura_id,json=auraId,proto3" json:"aura_id,omitempty"`
+	Condition      Aura_Condition `protobuf:"varint,2,opt,name=condition,proto3,enum=battle.Aura_Condition" json:"condition,omitempty"`
+	ConditionType  Aura_Type      `protobuf:"varint,3,opt,name=condition_type,json=conditionType,proto3,enum=battle.Aura_Type" json:"condition_type,omitempty"`
+	ConditionValue int32          `protobuf:"varint,4,opt,name=condition_value,json=conditionValue,proto3" json:"condition_value,omitempty"`
+	ConditionRate  int32          `protobuf:"varint,5,opt,name=condition_rate,json=conditionRate,proto3" json:"condition_rate,omitempty"`
+	IsWithinAction bool           `protobuf:"varint,6,opt,name=is_within_action,json=isWithinAction,proto3" json:"is_within_action,omitempty"`
+	Effects        []*Aura_Effect `protobuf:"bytes,7,rep,name=effects,proto3" json:"effects,omitempty"`
+}
+
+func (x *Aura) Reset() {
+	*x = Aura{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_battle_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Aura) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Aura) ProtoMessage() {}
+
+func (x *Aura) ProtoReflect() protoreflect.Message {
+	mi := &file_battle_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Aura.ProtoReflect.Descriptor instead.
+func (*Aura) Descriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Aura) GetAuraId() uint32 {
+	if x != nil {
+		return x.AuraId
+	}
+	return 0
+}
+
+func (x *Aura) GetCondition() Aura_Condition {
+	if x != nil {
+		return x.Condition
+	}
+	return Aura_NONE
+}
+
+func (x *Aura) GetConditionType() Aura_Type {
+	if x != nil {
+		return x.ConditionType
+	}
+	return Aura_NORMAL
+}
+
+func (x *Aura) GetConditionValue() int32 {
+	if x != nil {
+		return x.ConditionValue
+	}
+	return 0
+}
+
+func (x *Aura) GetConditionRate() int32 {
+	if x != nil {
+		return x.ConditionRate
+	}
+	return 0
+}
+
+func (x *Aura) GetIsWithinAction() bool {
+	if x != nil {
+		return x.IsWithinAction
+	}
+	return false
+}
+
+func (x *Aura) GetEffects() []*Aura_Effect {
+	if x != nil {
+		return x.Effects
+	}
+	return nil
+}
+
 type BaseUnit_AuraEffectRate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1380,7 +2112,7 @@ type BaseUnit_AuraEffectRate struct {
 func (x *BaseUnit_AuraEffectRate) Reset() {
 	*x = BaseUnit_AuraEffectRate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_battle_proto_msgTypes[8]
+		mi := &file_battle_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1393,7 +2125,7 @@ func (x *BaseUnit_AuraEffectRate) String() string {
 func (*BaseUnit_AuraEffectRate) ProtoMessage() {}
 
 func (x *BaseUnit_AuraEffectRate) ProtoReflect() protoreflect.Message {
-	mi := &file_battle_proto_msgTypes[8]
+	mi := &file_battle_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1428,6 +2160,204 @@ func (x *BaseUnit_AuraEffectRate) GetSecondaryValue() int32 {
 		return x.SecondaryValue
 	}
 	return 0
+}
+
+type Skill_Effect struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Target         Skill_Effect_Target         `protobuf:"varint,1,opt,name=target,proto3,enum=battle.Skill_Effect_Target" json:"target,omitempty"`
+	Param          Skill_Effect_Param          `protobuf:"varint,2,opt,name=param,proto3,enum=battle.Skill_Effect_Param" json:"param,omitempty"`
+	Calc           Skill_Effect_Calc           `protobuf:"varint,3,opt,name=calc,proto3,enum=battle.Skill_Effect_Calc" json:"calc,omitempty"`
+	AdditionalCalc Skill_Effect_AdditionalCalc `protobuf:"varint,4,opt,name=additional_calc,json=additionalCalc,proto3,enum=battle.Skill_Effect_AdditionalCalc" json:"additional_calc,omitempty"`
+	MinRate        int32                       `protobuf:"varint,5,opt,name=min_rate,json=minRate,proto3" json:"min_rate,omitempty"`
+	MaxRate        int32                       `protobuf:"varint,6,opt,name=max_rate,json=maxRate,proto3" json:"max_rate,omitempty"`
+	IsDamage       bool                        `protobuf:"varint,7,opt,name=is_damage,json=isDamage,proto3" json:"is_damage,omitempty"`
+	AdditionalRate int32                       `protobuf:"varint,8,opt,name=additional_rate,json=additionalRate,proto3" json:"additional_rate,omitempty"`
+}
+
+func (x *Skill_Effect) Reset() {
+	*x = Skill_Effect{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_battle_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Skill_Effect) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Skill_Effect) ProtoMessage() {}
+
+func (x *Skill_Effect) ProtoReflect() protoreflect.Message {
+	mi := &file_battle_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Skill_Effect.ProtoReflect.Descriptor instead.
+func (*Skill_Effect) Descriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *Skill_Effect) GetTarget() Skill_Effect_Target {
+	if x != nil {
+		return x.Target
+	}
+	return Skill_Effect_SELF
+}
+
+func (x *Skill_Effect) GetParam() Skill_Effect_Param {
+	if x != nil {
+		return x.Param
+	}
+	return Skill_Effect_NONE
+}
+
+func (x *Skill_Effect) GetCalc() Skill_Effect_Calc {
+	if x != nil {
+		return x.Calc
+	}
+	return Skill_Effect_MY_PHY
+}
+
+func (x *Skill_Effect) GetAdditionalCalc() Skill_Effect_AdditionalCalc {
+	if x != nil {
+		return x.AdditionalCalc
+	}
+	return Skill_Effect_NO_ADDITIONAL
+}
+
+func (x *Skill_Effect) GetMinRate() int32 {
+	if x != nil {
+		return x.MinRate
+	}
+	return 0
+}
+
+func (x *Skill_Effect) GetMaxRate() int32 {
+	if x != nil {
+		return x.MaxRate
+	}
+	return 0
+}
+
+func (x *Skill_Effect) GetIsDamage() bool {
+	if x != nil {
+		return x.IsDamage
+	}
+	return false
+}
+
+func (x *Skill_Effect) GetAdditionalRate() int32 {
+	if x != nil {
+		return x.AdditionalRate
+	}
+	return 0
+}
+
+type Aura_Effect struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Target         Aura_Effect_Target `protobuf:"varint,1,opt,name=target,proto3,enum=battle.Aura_Effect_Target" json:"target,omitempty"`
+	Param          Aura_Effect_Param  `protobuf:"varint,2,opt,name=param,proto3,enum=battle.Aura_Effect_Param" json:"param,omitempty"`
+	Calc           Aura_Effect_Calc   `protobuf:"varint,3,opt,name=calc,proto3,enum=battle.Aura_Effect_Calc" json:"calc,omitempty"`
+	MinRate        int32              `protobuf:"varint,4,opt,name=min_rate,json=minRate,proto3" json:"min_rate,omitempty"`
+	EffectRate     int32              `protobuf:"varint,5,opt,name=effect_rate,json=effectRate,proto3" json:"effect_rate,omitempty"`
+	AdditionalRate int32              `protobuf:"varint,6,opt,name=additional_rate,json=additionalRate,proto3" json:"additional_rate,omitempty"`
+	IsDamage       bool               `protobuf:"varint,7,opt,name=is_damage,json=isDamage,proto3" json:"is_damage,omitempty"`
+}
+
+func (x *Aura_Effect) Reset() {
+	*x = Aura_Effect{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_battle_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Aura_Effect) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Aura_Effect) ProtoMessage() {}
+
+func (x *Aura_Effect) ProtoReflect() protoreflect.Message {
+	mi := &file_battle_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Aura_Effect.ProtoReflect.Descriptor instead.
+func (*Aura_Effect) Descriptor() ([]byte, []int) {
+	return file_battle_proto_rawDescGZIP(), []int{8, 0}
+}
+
+func (x *Aura_Effect) GetTarget() Aura_Effect_Target {
+	if x != nil {
+		return x.Target
+	}
+	return Aura_Effect_SELF
+}
+
+func (x *Aura_Effect) GetParam() Aura_Effect_Param {
+	if x != nil {
+		return x.Param
+	}
+	return Aura_Effect_NONE
+}
+
+func (x *Aura_Effect) GetCalc() Aura_Effect_Calc {
+	if x != nil {
+		return x.Calc
+	}
+	return Aura_Effect_MY_PHY
+}
+
+func (x *Aura_Effect) GetMinRate() int32 {
+	if x != nil {
+		return x.MinRate
+	}
+	return 0
+}
+
+func (x *Aura_Effect) GetEffectRate() int32 {
+	if x != nil {
+		return x.EffectRate
+	}
+	return 0
+}
+
+func (x *Aura_Effect) GetAdditionalRate() int32 {
+	if x != nil {
+		return x.AdditionalRate
+	}
+	return 0
+}
+
+func (x *Aura_Effect) GetIsDamage() bool {
+	if x != nil {
+		return x.IsDamage
+	}
+	return false
 }
 
 var File_battle_proto protoreflect.FileDescriptor
@@ -1720,15 +2650,142 @@ var file_battle_proto_rawDesc = []byte{
 	0x65, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x04, 0x72, 0x61, 0x74, 0x65, 0x22, 0x28, 0x0a, 0x07, 0x45, 0x6e, 0x63, 0x68, 0x61, 0x6e, 0x74,
 	0x12, 0x0e, 0x0a, 0x0a, 0x4e, 0x4f, 0x5f, 0x45, 0x4e, 0x43, 0x48, 0x41, 0x4e, 0x54, 0x10, 0x00,
-	0x12, 0x0d, 0x0a, 0x09, 0x52, 0x45, 0x44, 0x55, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x01, 0x2a,
-	0x37, 0x0a, 0x0a, 0x42, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a,
-	0x10, 0x55, 0x4e, 0x44, 0x45, 0x46, 0x49, 0x4e, 0x45, 0x44, 0x5f, 0x42, 0x41, 0x54, 0x54, 0x4c,
-	0x45, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x53, 0x49, 0x4d, 0x55, 0x4c, 0x41, 0x54, 0x45, 0x5f,
-	0x42, 0x41, 0x54, 0x54, 0x4c, 0x45, 0x10, 0x01, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x69, 0x6a, 0x6a, 0x69, 0x72, 0x69, 0x2f, 0x73,
-	0x69, 0x6d, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x2f, 0x67, 0x72,
-	0x70, 0x63, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2f, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0x0d, 0x0a, 0x09, 0x52, 0x45, 0x44, 0x55, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x01, 0x22,
+	0x92, 0x08, 0x0a, 0x05, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x6b, 0x69,
+	0x6c, 0x6c, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x73, 0x6b, 0x69,
+	0x6c, 0x6c, 0x49, 0x64, 0x12, 0x35, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x17, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65,
+	0x2e, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x2e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x25, 0x0a, 0x0e, 0x63,
+	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x61,
+	0x74, 0x65, 0x12, 0x2e, 0x0a, 0x07, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x18, 0x04, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x53, 0x6b, 0x69,
+	0x6c, 0x6c, 0x2e, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x52, 0x07, 0x65, 0x66, 0x66, 0x65, 0x63,
+	0x74, 0x73, 0x12, 0x25, 0x0a, 0x0e, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x5f,
+	0x72, 0x61, 0x74, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x73, 0x65, 0x63, 0x6f,
+	0x6e, 0x64, 0x61, 0x72, 0x79, 0x52, 0x61, 0x74, 0x65, 0x12, 0x38, 0x0a, 0x0d, 0x65, 0x6e, 0x63,
+	0x68, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x13, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x45, 0x6e, 0x63, 0x68, 0x61, 0x6e,
+	0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0c, 0x65, 0x6e, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x6e,
+	0x66, 0x6f, 0x73, 0x1a, 0xb4, 0x05, 0x0a, 0x06, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x12, 0x33,
+	0x0a, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1b,
+	0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x2e, 0x45, 0x66,
+	0x66, 0x65, 0x63, 0x74, 0x2e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x52, 0x06, 0x74, 0x61, 0x72,
+	0x67, 0x65, 0x74, 0x12, 0x30, 0x0a, 0x05, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x53, 0x6b, 0x69, 0x6c,
+	0x6c, 0x2e, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x52, 0x05,
+	0x70, 0x61, 0x72, 0x61, 0x6d, 0x12, 0x2d, 0x0a, 0x04, 0x63, 0x61, 0x6c, 0x63, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x53, 0x6b, 0x69,
+	0x6c, 0x6c, 0x2e, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x52, 0x04,
+	0x63, 0x61, 0x6c, 0x63, 0x12, 0x4c, 0x0a, 0x0f, 0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x61, 0x6c, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x23, 0x2e,
+	0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x2e, 0x45, 0x66, 0x66,
+	0x65, 0x63, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x43, 0x61,
+	0x6c, 0x63, 0x52, 0x0e, 0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x43, 0x61,
+	0x6c, 0x63, 0x12, 0x19, 0x0a, 0x08, 0x6d, 0x69, 0x6e, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x6d, 0x69, 0x6e, 0x52, 0x61, 0x74, 0x65, 0x12, 0x19, 0x0a,
+	0x08, 0x6d, 0x61, 0x78, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x07, 0x6d, 0x61, 0x78, 0x52, 0x61, 0x74, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x73, 0x5f, 0x64,
+	0x61, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x69, 0x73, 0x44,
+	0x61, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x61, 0x6c, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e,
+	0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x52, 0x61, 0x74, 0x65, 0x22, 0x50,
+	0x0a, 0x06, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x08, 0x0a, 0x04, 0x53, 0x45, 0x4c, 0x46,
+	0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x45, 0x4e, 0x45, 0x4d, 0x59, 0x5f, 0x46, 0x49, 0x52, 0x53,
+	0x54, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x45, 0x4e, 0x45, 0x4d, 0x59, 0x5f, 0x41, 0x4c, 0x4c,
+	0x10, 0x02, 0x12, 0x0e, 0x0a, 0x0a, 0x41, 0x4c, 0x4c, 0x59, 0x5f, 0x46, 0x49, 0x52, 0x53, 0x54,
+	0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x4c, 0x4c, 0x59, 0x5f, 0x41, 0x4c, 0x4c, 0x10, 0x04,
+	0x22, 0x34, 0x0a, 0x05, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e,
+	0x45, 0x10, 0x00, 0x12, 0x06, 0x0a, 0x02, 0x48, 0x50, 0x10, 0x01, 0x12, 0x07, 0x0a, 0x03, 0x50,
+	0x48, 0x59, 0x10, 0x02, 0x12, 0x07, 0x0a, 0x03, 0x49, 0x4e, 0x54, 0x10, 0x03, 0x12, 0x07, 0x0a,
+	0x03, 0x41, 0x47, 0x49, 0x10, 0x04, 0x22, 0x59, 0x0a, 0x04, 0x43, 0x61, 0x6c, 0x63, 0x12, 0x0a,
+	0x0a, 0x06, 0x4d, 0x59, 0x5f, 0x50, 0x48, 0x59, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x59,
+	0x5f, 0x49, 0x4e, 0x54, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x59, 0x5f, 0x41, 0x47, 0x49,
+	0x10, 0x02, 0x12, 0x13, 0x0a, 0x0f, 0x4d, 0x59, 0x5f, 0x49, 0x4e, 0x54, 0x5f, 0x59, 0x4f, 0x55,
+	0x52, 0x5f, 0x50, 0x48, 0x59, 0x10, 0x03, 0x12, 0x18, 0x0a, 0x14, 0x4d, 0x59, 0x5f, 0x44, 0x41,
+	0x4d, 0x41, 0x47, 0x45, 0x44, 0x5f, 0x49, 0x4e, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10,
+	0x04, 0x22, 0x67, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x43,
+	0x61, 0x6c, 0x63, 0x12, 0x11, 0x0a, 0x0d, 0x4e, 0x4f, 0x5f, 0x41, 0x44, 0x44, 0x49, 0x54, 0x49,
+	0x4f, 0x4e, 0x41, 0x4c, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x50, 0x4f, 0x49, 0x53, 0x4f, 0x4e,
+	0x5f, 0x55, 0x4e, 0x49, 0x54, 0x10, 0x01, 0x12, 0x0e, 0x0a, 0x0a, 0x53, 0x4c, 0x45, 0x45, 0x50,
+	0x5f, 0x55, 0x4e, 0x49, 0x54, 0x10, 0x02, 0x12, 0x12, 0x0a, 0x0e, 0x43, 0x4f, 0x4e, 0x46, 0x55,
+	0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x49, 0x54, 0x10, 0x03, 0x12, 0x0d, 0x0a, 0x09, 0x46,
+	0x45, 0x41, 0x52, 0x5f, 0x55, 0x4e, 0x49, 0x54, 0x10, 0x04, 0x22, 0x48, 0x0a, 0x09, 0x43, 0x6f,
+	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10,
+	0x00, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x43, 0x54, 0x49, 0x56, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a,
+	0x07, 0x4f, 0x50, 0x45, 0x4e, 0x49, 0x4e, 0x47, 0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x43, 0x4f,
+	0x55, 0x4e, 0x54, 0x45, 0x52, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x45, 0x4c, 0x46, 0x5f,
+	0x48, 0x50, 0x10, 0x04, 0x22, 0xd9, 0x07, 0x0a, 0x04, 0x41, 0x75, 0x72, 0x61, 0x12, 0x17, 0x0a,
+	0x07, 0x61, 0x75, 0x72, 0x61, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06,
+	0x61, 0x75, 0x72, 0x61, 0x49, 0x64, 0x12, 0x34, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x16, 0x2e, 0x62, 0x61, 0x74, 0x74,
+	0x6c, 0x65, 0x2e, 0x41, 0x75, 0x72, 0x61, 0x2e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x38, 0x0a, 0x0e,
+	0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x11, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x41, 0x75,
+	0x72, 0x61, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12,
+	0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x72, 0x61, 0x74,
+	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x61, 0x74, 0x65, 0x12, 0x28, 0x0a, 0x10, 0x69, 0x73, 0x5f, 0x77, 0x69, 0x74,
+	0x68, 0x69, 0x6e, 0x5f, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x0e, 0x69, 0x73, 0x57, 0x69, 0x74, 0x68, 0x69, 0x6e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x2d, 0x0a, 0x07, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x13, 0x2e, 0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x72, 0x61, 0x2e,
+	0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x52, 0x07, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x1a,
+	0x80, 0x04, 0x0a, 0x06, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x12, 0x32, 0x0a, 0x06, 0x74, 0x61,
+	0x72, 0x67, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x62, 0x61, 0x74,
+	0x74, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x72, 0x61, 0x2e, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x2e,
+	0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x52, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x2f,
+	0x0a, 0x05, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e,
+	0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x72, 0x61, 0x2e, 0x45, 0x66, 0x66, 0x65,
+	0x63, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x52, 0x05, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x12,
+	0x2c, 0x0a, 0x04, 0x63, 0x61, 0x6c, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e,
+	0x62, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x72, 0x61, 0x2e, 0x45, 0x66, 0x66, 0x65,
+	0x63, 0x74, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x52, 0x04, 0x63, 0x61, 0x6c, 0x63, 0x12, 0x19, 0x0a,
+	0x08, 0x6d, 0x69, 0x6e, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x07, 0x6d, 0x69, 0x6e, 0x52, 0x61, 0x74, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x65, 0x66, 0x66, 0x65,
+	0x63, 0x74, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x65,
+	0x66, 0x66, 0x65, 0x63, 0x74, 0x52, 0x61, 0x74, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x61, 0x64, 0x64,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x5f, 0x72, 0x61, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x0e, 0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x52, 0x61,
+	0x74, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x73, 0x5f, 0x64, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x69, 0x73, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x22,
+	0x50, 0x0a, 0x06, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x08, 0x0a, 0x04, 0x53, 0x45, 0x4c,
+	0x46, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x45, 0x4e, 0x45, 0x4d, 0x59, 0x5f, 0x46, 0x49, 0x52,
+	0x53, 0x54, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x45, 0x4e, 0x45, 0x4d, 0x59, 0x5f, 0x41, 0x4c,
+	0x4c, 0x10, 0x02, 0x12, 0x0e, 0x0a, 0x0a, 0x41, 0x4c, 0x4c, 0x59, 0x5f, 0x46, 0x49, 0x52, 0x53,
+	0x54, 0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x4c, 0x4c, 0x59, 0x5f, 0x41, 0x4c, 0x4c, 0x10,
+	0x04, 0x22, 0x34, 0x0a, 0x05, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f,
+	0x4e, 0x45, 0x10, 0x00, 0x12, 0x06, 0x0a, 0x02, 0x48, 0x50, 0x10, 0x01, 0x12, 0x07, 0x0a, 0x03,
+	0x50, 0x48, 0x59, 0x10, 0x02, 0x12, 0x07, 0x0a, 0x03, 0x49, 0x4e, 0x54, 0x10, 0x03, 0x12, 0x07,
+	0x0a, 0x03, 0x41, 0x47, 0x49, 0x10, 0x04, 0x22, 0x59, 0x0a, 0x04, 0x43, 0x61, 0x6c, 0x63, 0x12,
+	0x0a, 0x0a, 0x06, 0x4d, 0x59, 0x5f, 0x50, 0x48, 0x59, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d,
+	0x59, 0x5f, 0x49, 0x4e, 0x54, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x59, 0x5f, 0x41, 0x47,
+	0x49, 0x10, 0x02, 0x12, 0x13, 0x0a, 0x0f, 0x4d, 0x59, 0x5f, 0x49, 0x4e, 0x54, 0x5f, 0x59, 0x4f,
+	0x55, 0x52, 0x5f, 0x50, 0x48, 0x59, 0x10, 0x03, 0x12, 0x18, 0x0a, 0x14, 0x4d, 0x59, 0x5f, 0x44,
+	0x41, 0x4d, 0x41, 0x47, 0x45, 0x44, 0x5f, 0x49, 0x4e, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e,
+	0x10, 0x04, 0x22, 0x48, 0x0a, 0x09, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x43, 0x54,
+	0x49, 0x56, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x4f, 0x50, 0x45, 0x4e, 0x49, 0x4e, 0x47,
+	0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x45, 0x52, 0x10, 0x03, 0x12,
+	0x0b, 0x0a, 0x07, 0x53, 0x45, 0x4c, 0x46, 0x5f, 0x48, 0x50, 0x10, 0x04, 0x22, 0x52, 0x0a, 0x04,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x4e, 0x4f, 0x52, 0x4d, 0x41, 0x4c, 0x10, 0x00,
+	0x12, 0x0a, 0x0a, 0x06, 0x45, 0x46, 0x46, 0x45, 0x43, 0x54, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09,
+	0x53, 0x45, 0x43, 0x4f, 0x4e, 0x44, 0x41, 0x52, 0x59, 0x10, 0x02, 0x12, 0x14, 0x0a, 0x10, 0x53,
+	0x45, 0x43, 0x4f, 0x4e, 0x44, 0x41, 0x52, 0x59, 0x5f, 0x45, 0x46, 0x46, 0x45, 0x43, 0x54, 0x10,
+	0x03, 0x12, 0x0d, 0x0a, 0x09, 0x43, 0x4f, 0x4e, 0x44, 0x49, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x04,
+	0x2a, 0x37, 0x0a, 0x0a, 0x42, 0x61, 0x74, 0x74, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14,
+	0x0a, 0x10, 0x55, 0x4e, 0x44, 0x45, 0x46, 0x49, 0x4e, 0x45, 0x44, 0x5f, 0x42, 0x41, 0x54, 0x54,
+	0x4c, 0x45, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x53, 0x49, 0x4d, 0x55, 0x4c, 0x41, 0x54, 0x45,
+	0x5f, 0x42, 0x41, 0x54, 0x54, 0x4c, 0x45, 0x10, 0x01, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x69, 0x6a, 0x6a, 0x69, 0x72, 0x69, 0x2f,
+	0x73, 0x69, 0x6d, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x2f, 0x67,
+	0x72, 0x70, 0x63, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2f, 0x62, 0x61, 0x74, 0x74, 0x6c,
+	0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1743,51 +2800,78 @@ func file_battle_proto_rawDescGZIP() []byte {
 	return file_battle_proto_rawDescData
 }
 
-var file_battle_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_battle_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_battle_proto_enumTypes = make([]protoimpl.EnumInfo, 16)
+var file_battle_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_battle_proto_goTypes = []interface{}{
-	(BattleType)(0),                 // 0: battle.BattleType
-	(Battle_Result)(0),              // 1: battle.Battle.Result
-	(Battle_State)(0),               // 2: battle.Battle.State
-	(BaseUnit_Result)(0),            // 3: battle.BaseUnit.Result
-	(CurrentUnit_State)(0),          // 4: battle.CurrentUnit.State
-	(EnchantInfo_Enchant)(0),        // 5: battle.EnchantInfo.Enchant
-	(*BattleId)(nil),                // 6: battle.BattleId
-	(*Battle)(nil),                  // 7: battle.Battle
-	(*BattleAction)(nil),            // 8: battle.BattleAction
-	(*Unit)(nil),                    // 9: battle.Unit
-	(*BaseUnit)(nil),                // 10: battle.BaseUnit
-	(*CurrentUnit)(nil),             // 11: battle.CurrentUnit
-	(*EnchantInfo)(nil),             // 12: battle.EnchantInfo
-	nil,                             // 13: battle.BaseUnit.ResultRate1000Entry
-	(*BaseUnit_AuraEffectRate)(nil), // 14: battle.BaseUnit.AuraEffectRate
-	nil,                             // 15: battle.CurrentUnit.AuraEnabledEntry
-	nil,                             // 16: battle.CurrentUnit.StateEffectRateEntry
-	nil,                             // 17: battle.CurrentUnit.WithinActionValueEntry
+	(BattleType)(0),                  // 0: battle.BattleType
+	(Battle_Result)(0),               // 1: battle.Battle.Result
+	(Battle_State)(0),                // 2: battle.Battle.State
+	(BaseUnit_Result)(0),             // 3: battle.BaseUnit.Result
+	(CurrentUnit_State)(0),           // 4: battle.CurrentUnit.State
+	(EnchantInfo_Enchant)(0),         // 5: battle.EnchantInfo.Enchant
+	(Skill_Condition)(0),             // 6: battle.Skill.Condition
+	(Skill_Effect_Target)(0),         // 7: battle.Skill.Effect.Target
+	(Skill_Effect_Param)(0),          // 8: battle.Skill.Effect.Param
+	(Skill_Effect_Calc)(0),           // 9: battle.Skill.Effect.Calc
+	(Skill_Effect_AdditionalCalc)(0), // 10: battle.Skill.Effect.AdditionalCalc
+	(Aura_Condition)(0),              // 11: battle.Aura.Condition
+	(Aura_Type)(0),                   // 12: battle.Aura.Type
+	(Aura_Effect_Target)(0),          // 13: battle.Aura.Effect.Target
+	(Aura_Effect_Param)(0),           // 14: battle.Aura.Effect.Param
+	(Aura_Effect_Calc)(0),            // 15: battle.Aura.Effect.Calc
+	(*BattleId)(nil),                 // 16: battle.BattleId
+	(*Battle)(nil),                   // 17: battle.Battle
+	(*BattleAction)(nil),             // 18: battle.BattleAction
+	(*Unit)(nil),                     // 19: battle.Unit
+	(*BaseUnit)(nil),                 // 20: battle.BaseUnit
+	(*CurrentUnit)(nil),              // 21: battle.CurrentUnit
+	(*EnchantInfo)(nil),              // 22: battle.EnchantInfo
+	(*Skill)(nil),                    // 23: battle.Skill
+	(*Aura)(nil),                     // 24: battle.Aura
+	nil,                              // 25: battle.BaseUnit.ResultRate1000Entry
+	(*BaseUnit_AuraEffectRate)(nil),  // 26: battle.BaseUnit.AuraEffectRate
+	nil,                              // 27: battle.CurrentUnit.AuraEnabledEntry
+	nil,                              // 28: battle.CurrentUnit.StateEffectRateEntry
+	nil,                              // 29: battle.CurrentUnit.WithinActionValueEntry
+	(*Skill_Effect)(nil),             // 30: battle.Skill.Effect
+	(*Aura_Effect)(nil),              // 31: battle.Aura.Effect
 }
 var file_battle_proto_depIdxs = []int32{
-	9,  // 0: battle.Battle.units:type_name -> battle.Unit
+	19, // 0: battle.Battle.units:type_name -> battle.Unit
 	1,  // 1: battle.Battle.result:type_name -> battle.Battle.Result
 	2,  // 2: battle.Battle.state:type_name -> battle.Battle.State
-	8,  // 3: battle.Battle.actions:type_name -> battle.BattleAction
-	11, // 4: battle.BattleAction.units:type_name -> battle.CurrentUnit
-	10, // 5: battle.Unit.base:type_name -> battle.BaseUnit
-	11, // 6: battle.Unit.current:type_name -> battle.CurrentUnit
-	13, // 7: battle.BaseUnit.result_rate1000:type_name -> battle.BaseUnit.ResultRate1000Entry
-	14, // 8: battle.BaseUnit.auras:type_name -> battle.BaseUnit.AuraEffectRate
-	12, // 9: battle.BaseUnit.enchant_infos:type_name -> battle.EnchantInfo
+	18, // 3: battle.Battle.actions:type_name -> battle.BattleAction
+	21, // 4: battle.BattleAction.units:type_name -> battle.CurrentUnit
+	20, // 5: battle.Unit.base:type_name -> battle.BaseUnit
+	21, // 6: battle.Unit.current:type_name -> battle.CurrentUnit
+	25, // 7: battle.BaseUnit.result_rate1000:type_name -> battle.BaseUnit.ResultRate1000Entry
+	26, // 8: battle.BaseUnit.auras:type_name -> battle.BaseUnit.AuraEffectRate
+	22, // 9: battle.BaseUnit.enchant_infos:type_name -> battle.EnchantInfo
 	4,  // 10: battle.CurrentUnit.state:type_name -> battle.CurrentUnit.State
-	15, // 11: battle.CurrentUnit.aura_enabled:type_name -> battle.CurrentUnit.AuraEnabledEntry
-	16, // 12: battle.CurrentUnit.state_effect_rate:type_name -> battle.CurrentUnit.StateEffectRateEntry
-	9,  // 13: battle.CurrentUnit.last_targets:type_name -> battle.Unit
-	17, // 14: battle.CurrentUnit.within_action_value:type_name -> battle.CurrentUnit.WithinActionValueEntry
-	12, // 15: battle.CurrentUnit.enchant_infos:type_name -> battle.EnchantInfo
+	27, // 11: battle.CurrentUnit.aura_enabled:type_name -> battle.CurrentUnit.AuraEnabledEntry
+	28, // 12: battle.CurrentUnit.state_effect_rate:type_name -> battle.CurrentUnit.StateEffectRateEntry
+	19, // 13: battle.CurrentUnit.last_targets:type_name -> battle.Unit
+	29, // 14: battle.CurrentUnit.within_action_value:type_name -> battle.CurrentUnit.WithinActionValueEntry
+	22, // 15: battle.CurrentUnit.enchant_infos:type_name -> battle.EnchantInfo
 	5,  // 16: battle.EnchantInfo.enchant_type:type_name -> battle.EnchantInfo.Enchant
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	6,  // 17: battle.Skill.condition:type_name -> battle.Skill.Condition
+	30, // 18: battle.Skill.effects:type_name -> battle.Skill.Effect
+	22, // 19: battle.Skill.enchant_infos:type_name -> battle.EnchantInfo
+	11, // 20: battle.Aura.condition:type_name -> battle.Aura.Condition
+	12, // 21: battle.Aura.condition_type:type_name -> battle.Aura.Type
+	31, // 22: battle.Aura.effects:type_name -> battle.Aura.Effect
+	7,  // 23: battle.Skill.Effect.target:type_name -> battle.Skill.Effect.Target
+	8,  // 24: battle.Skill.Effect.param:type_name -> battle.Skill.Effect.Param
+	9,  // 25: battle.Skill.Effect.calc:type_name -> battle.Skill.Effect.Calc
+	10, // 26: battle.Skill.Effect.additional_calc:type_name -> battle.Skill.Effect.AdditionalCalc
+	13, // 27: battle.Aura.Effect.target:type_name -> battle.Aura.Effect.Target
+	14, // 28: battle.Aura.Effect.param:type_name -> battle.Aura.Effect.Param
+	15, // 29: battle.Aura.Effect.calc:type_name -> battle.Aura.Effect.Calc
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_battle_proto_init() }
@@ -1880,8 +2964,56 @@ func file_battle_proto_init() {
 				return nil
 			}
 		}
+		file_battle_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Skill); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_battle_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Aura); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_battle_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BaseUnit_AuraEffectRate); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_battle_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Skill_Effect); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_battle_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Aura_Effect); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1898,8 +3030,8 @@ func file_battle_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_battle_proto_rawDesc,
-			NumEnums:      6,
-			NumMessages:   12,
+			NumEnums:      16,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

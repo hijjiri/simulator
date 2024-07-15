@@ -175,3 +175,111 @@ message EnchantInfo {
     }
     int32 rate = 2;
 }
+
+message Skill {
+    uint32 skill_id = 1;
+    Condition condition = 2;
+    enum Condition {
+        NONE = 0;
+        ACTIVE = 1;
+        OPENING = 2;
+        COUNTER = 3;
+        SELF_HP = 4;
+    }
+    int32 condition_rate = 3;
+    repeated Effect effects = 4;
+    message Effect {
+        Target target = 1;
+        enum Target {
+            SELF = 0;
+            ENEMY_FIRST = 1;
+            ENEMY_ALL = 2;
+            ALLY_FIRST = 3;
+            ALLY_ALL = 4;
+        }
+        Param param = 2;
+        enum Param {
+            NONE = 0;
+            HP = 1;
+            PHY = 2;
+            INT = 3;
+            AGI = 4;
+        }
+        Calc calc = 3;
+        enum Calc {
+            MY_PHY          = 0;
+            MY_INT          = 1;
+            MY_AGI          = 2;
+            MY_INT_YOUR_PHY = 3; // 回復係数
+            MY_DAMAGED_IN_ACTION = 4;
+        }
+        AdditionalCalc additional_calc = 4;
+        enum AdditionalCalc {
+            NO_ADDITIONAL = 0;
+            POISON_UNIT = 1;
+            SLEEP_UNIT = 2;
+            CONFUSION_UNIT = 3;
+            FEAR_UNIT = 4;
+        }
+        int32 min_rate = 5;
+        int32 max_rate = 6;
+        bool is_damage = 7;
+        int32 additional_rate = 8;
+    }
+    int32 secondary_rate = 5;
+    repeated EnchantInfo enchant_infos = 6;
+}
+
+message Aura {
+    uint32 aura_id = 1;
+    Condition condition = 2;
+    enum Condition {
+        NONE = 0;
+        ACTIVE = 1;
+        OPENING = 2;
+        COUNTER = 3;
+        SELF_HP = 4;
+    }
+    Type condition_type = 3;
+    enum Type {
+        NORMAL = 0;
+        EFFECT = 1;
+        SECONDARY = 2;
+        SECONDARY_EFFECT = 3;
+        CONDITION = 4;
+    }
+    int32 condition_value = 4;
+    int32 condition_rate = 5;
+    bool is_within_action = 6;
+    repeated Effect effects = 7;
+    message Effect {
+        Target target = 1;
+        enum Target {
+            SELF = 0;
+            ENEMY_FIRST = 1;
+            ENEMY_ALL = 2;
+            ALLY_FIRST = 3;
+            ALLY_ALL = 4;
+        }
+        Param param = 2;
+        enum Param {
+            NONE = 0;
+            HP = 1;
+            PHY = 2;
+            INT = 3;
+            AGI = 4;
+        }
+        Calc calc = 3;
+        enum Calc {
+            MY_PHY          = 0;
+            MY_INT          = 1;
+            MY_AGI          = 2;
+            MY_INT_YOUR_PHY = 3;
+            MY_DAMAGED_IN_ACTION = 4;
+        }
+        int32 min_rate = 4;
+        int32 effect_rate = 5;
+        int32 additional_rate = 6;
+        bool is_damage = 7;
+    }
+}
