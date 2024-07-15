@@ -10,13 +10,13 @@ import (
 type InMemoryRepository struct {
 	mu    sync.Mutex
 	cache map[uint32]*battle.Skill
-	auras map[uint32]*battle.Aura // 追加
+	auras map[uint32]*battle.Aura
 }
 
 func NewInMemoryRepository() *InMemoryRepository {
 	return &InMemoryRepository{
 		cache: make(map[uint32]*battle.Skill),
-		auras: make(map[uint32]*battle.Aura), // 追加
+		auras: make(map[uint32]*battle.Aura),
 	}
 }
 
