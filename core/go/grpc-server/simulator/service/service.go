@@ -20,8 +20,9 @@ import (
 )
 
 const (
-	workerNum = 10
-	queueSize = 1
+	workerNum  = 10
+	queueSize  = 1
+	bufferSize = 1
 )
 
 var requestQueue chan func()
@@ -44,8 +45,8 @@ type Server struct {
 }
 
 func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*pb.SimulateResponse, error) {
-	resultCh := make(chan *pb.SimulateResponse, 1)
-	errorCh := make(chan error, 1)
+	resultCh := make(chan *pb.SimulateResponse, bufferSize)
+	errorCh := make(chan error, bufferSize)
 
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -102,6 +103,12 @@ func (s *Server) SimulateBattle(ctx context.Context, in *pb.SimulateRequest) (*p
 		if len(units) < 6 {
 			errorCh <- fmt.Errorf("units number not enough %v", len(units))
 			return
+		}
+
+		// unitsの中身をログ出力する
+		log.Printf("Units: %v", units)
+		for i, unit := range units {
+			log.Printf("Unit %d: %+v", i, unit)
 		}
 
 		for i := 0; i < int(in.GetCounts()); i++ {
