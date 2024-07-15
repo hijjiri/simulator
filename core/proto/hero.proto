@@ -30,4 +30,32 @@ message Param {
     int32 agi = 4;
 }
 
+message HeroData {
+    uint32 hero_id = 1;
+    uint32 hero_type = 2;
+    Param param = 3;
+    Param trend = 4;
+    uint32 active = 5;
+    uint32 passive = 6;
+    Lock lock = 7;
+    enum Lock {
+        NONE = 0;
+        ADMIN = 1;
+        DECK = 2;
+        TRADE = 3;
+    }
+    repeated uint32 stocked_skill_ids = 8;
+    repeated uint32 attribute_types = 9;
+    int64 lock_until = 10;
+    repeated uint32 skills = 11;
+    uint32 active_skill = 12;
+    map<uint32,V2SkillInfo> v2_skill_infos = 13;
+}
+
+message V2SkillInfo {
+    uint32 skill_id = 1;
+    bool unlocked = 2;
+    bool tentative = 3;
+}
+
 message Empty {}
