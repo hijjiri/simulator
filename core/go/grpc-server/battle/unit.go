@@ -152,7 +152,7 @@ func createBaseUnit(position, hp, phy, intl, agi int32, actives []uint32, h *h.H
 	}
 }
 
-func createCurrentUnit(position, hp, phy, intl, agi int32, auraEnabled map[uint32]bool, stateEffectRateMap map[int32]int32, withinActionRateMap map[uint32]int32, skill *Skill, resurrectionEnabled bool) *CurrentUnit {
+func createCurrentUnit(position, hp, phy, intl, agi int32, effectsMap map[Aura_Effect_Param]int32, auraEnabled map[uint32]bool, stateEffectRateMap map[int32]int32, withinActionRateMap map[uint32]int32, skill *Skill, resurrectionEnabled bool) *CurrentUnit {
 	return &CurrentUnit{
 		Position:              position,
 		Hp:                    hp,

@@ -1,10 +1,9 @@
-package battle
+package aura
 
 var r Repository
 
 type Repository interface {
-	GetSkill(skillId uint32) (*Skill, error)
-	GetAuraSkill(auraType uint32) (*Aura, error)
+	GetAuraTypeMaster(auraType uint32) (*AuraTypeMaster, error)
 }
 
 func RegisterRepository(repository Repository) {
