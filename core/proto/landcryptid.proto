@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package landcryptid;
+
+option go_package = "github.com/hijjiri/simulator/core/grpc-server/landcryptid";
+
+message CryptidInfo {
+    uint32 land_type = 1;
+    int32 energy = 2;
+    int32 lv = 3;
+    int32 season = 4;
+    int32 labo_ce = 5;
+    CryptidParam hp = 6;
+    CryptidParam phy = 7;
+    CryptidParam int = 8;
+    CryptidParam agi = 9;
+    CryptidParam recovery = 10;
+}
+
+message CryptidParam {
+    int32 divide_rate100 = 1;
+    int32 ce = 2;
+    int32 lv = 3;
+    int32 buff_rate1000 = 4;
+}

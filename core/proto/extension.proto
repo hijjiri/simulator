@@ -22,6 +22,7 @@ message ExtensionData {
     repeated string title = 7;
     uint32 land_type = 8;
     int64 lock_until = 9;
+    uint32 aura = 10;
 }
 
 message Param {

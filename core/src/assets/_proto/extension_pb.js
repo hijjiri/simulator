@@ -126,7 +126,8 @@ proto.extension.ExtensionData.toObject = function(includeInstance, msg) {
     lock: jspb.Message.getFieldWithDefault(msg, 6, 0),
     titleList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
     landType: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    lockUntil: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    lockUntil: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    aura: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -200,6 +201,10 @@ proto.extension.ExtensionData.deserializeBinaryFromReader = function(msg, reader
     case 9:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLockUntil(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setAura(value);
       break;
     default:
       reader.skipField();
@@ -292,6 +297,13 @@ proto.extension.ExtensionData.serializeBinaryToWriter = function(message, writer
   if (f !== 0) {
     writer.writeInt64(
       9,
+      f
+    );
+  }
+  f = message.getAura();
+  if (f !== 0) {
+    writer.writeUint32(
+      10,
       f
     );
   }
@@ -526,6 +538,24 @@ proto.extension.ExtensionData.prototype.getLockUntil = function() {
  */
 proto.extension.ExtensionData.prototype.setLockUntil = function(value) {
   return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional uint32 aura = 10;
+ * @return {number}
+ */
+proto.extension.ExtensionData.prototype.getAura = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.extension.ExtensionData} returns this
+ */
+proto.extension.ExtensionData.prototype.setAura = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
