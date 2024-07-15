@@ -69,6 +69,8 @@ func initAuraEffects(auras []*au.AuraEffect, contentType string) ([]*BaseUnit_Au
 				isValid = master.IsQuest() && master.IsBeforeBattle()
 			case "Battle":
 				isValid = master.IsBattle() && master.IsBeforeBattle()
+			case "simulator":
+				isValid = false
 			}
 
 			if isValid {

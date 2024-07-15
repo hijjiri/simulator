@@ -24,7 +24,7 @@ func main() {
 	client := pb.NewSimulatorServiceClient(conn)
 
 	var wg sync.WaitGroup
-	requests := 100 // 100回リクエストを送信
+	requests := 1 // 100回リクエストを送信
 
 	for i := 0; i < requests; i++ {
 		wg.Add(1)
@@ -34,7 +34,7 @@ func main() {
 			defer cancel()
 
 			_, err := client.SimulateBattle(ctx, &pb.SimulateRequest{
-				Counts: 100,
+				Counts: 1,
 				SimulateOffenseDeck: &pb.Deck{
 					Units: []*pb.DeckUnit{
 						{HeroId: 1, ExtensionIds: []uint32{101, 102}, SkillOrders: []int32{1, 2}, HeroActiveIndex: 1},
